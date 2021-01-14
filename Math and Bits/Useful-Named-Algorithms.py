@@ -1,5 +1,5 @@
 """
-Sieve of Eratosthenes Algorithm for printing prime numbers up to n in O(nloglogn) time
+1. Sieve of Eratosthenes Algorithm for printing prime numbers up to n in O(nloglogn) time
 
     i-loop:
             Running a loop to select a prime number in (2 to root(n)), whose
@@ -29,4 +29,17 @@ def soe(n):
                 primes[j] = False
     return [i for i in range(0, n+1) if primes[i]]
 
-#print(soe(128))
+"""
+2. Euclidean Algorithm to compute HCF:
+
+The Euclidean algorithm is a recursive technique to calculate the GCD of two numbers A,B given A>B. It states that,
+GCD(A,B) = GCD(A-B, B). Since it is difficult to determine which number passed as argument is larger, we optimise
+this algorithm and instead of subtraction we compute modulus which removes the -ve parameter issue.
+"""
+
+def gcd(A,B):
+    if B == 0:
+        return A
+    else:
+        return gcd(B, A%B)
+  
