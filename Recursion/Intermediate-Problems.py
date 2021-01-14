@@ -1,9 +1,9 @@
 """
 1. Palindrome Check Using Recursion:
+
 There are two methods - Reversing a string and comparing with the original. And recursively checking for
 corner elements in reducing substring till substring ceases to exist(n == 1 or n == 0), Although in Python this
-can be done very simply, using: s == s[::-1] string manipulation and slicing.
-
+can be done very simply, using: s == s[::-1], pythonic string manipulation and slicing.
 As base case we are checking if the two variables signifying start and end of string have met in the center.
 If they have not we are taking boolean and of the corner character's equality and the next set of call chars.
 Time complexity is Theta(n), the same as pythonic slicing method, rather the slicing method has less auxillary
@@ -40,6 +40,7 @@ def rope(n,a,b,c):
 
 """
 3. Generating Subsets Using Recursion:
+
 For a string "ABC" the subsets are "", "A", "B", "C", "AB"...."ABC". We make a recursion tree starting from an empty literal,
 and at each level we make a recursion call to add one of these letters. When an index variable increments and reaches the length
 of the string (at three levels of recursion), we obtain the leaf nodes as the answer.
@@ -55,4 +56,26 @@ def genSub(s, curr="", index=0):
 
 """
 4. Printing Permutations Using Recursion:
+
+We use recursion to increment an index variable i to denote the position of the character being swapped. i=0 swaps the 0th character with 
+characters j=0,1,2. Hence we also require a loop to decide which character will be used for swapping. In the next recursive call, when i 
+is incremented by 1, i=1, we swap the 1st character with characters j=1,2 and the two strings obtained are the answers. Thus we need to print
+them when i reaches length len(s)-1. The loop for j runs from i to len(s)-1. The time complexity of this solution is O(n^2), which is the 
+same as the iterative solution and also utilises theta(n) auxillary space for the recursive call stack. Thus its not an optimisable solution.
 """
+def swap(s,i,j):
+    s = list(s)
+    t = s[i]
+    s[i] = s[j]
+    s[j] = t
+    s = "".join(s)
+    return s 
+
+def permute(s, i=0):
+    if i == len(s)-1:
+        print(s)
+        return
+    else:
+        for j in range(i, len(s)):
+            permute(s=swap(s, i, j), i = i+1)
+            
