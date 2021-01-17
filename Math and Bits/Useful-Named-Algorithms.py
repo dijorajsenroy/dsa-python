@@ -43,3 +43,36 @@ def gcd(A,B):
     else:
         return gcd(B, A%B)
   
+"""
+4. Number of divisors and Sum of divisors:
+
+To compute these two quanitities we find the prime factorisation of the number n. Such that n = p1^e1 . p2^e2 .... pk^ek. 
+Where pk is the kth prime factor and ek is its exponent value. For finding prime factors we may use Sieve of Eratosthenes,
+or Fermats Factorization Method. The number of divisors thus D(n) = (e1 + 1)*(e2 + 1)*...(ek + 1). The sum of factors is:
+S(n) = (p1^(e1+1) - 1)/(p1 - 1) * (p2^(e2+1) - 1)/(p2 - 1) * (pk^(ek+1) - 1)/(pk - 1). Converting to code we have :
+"""
+
+# function to compute p powers of q factors - O(pq)
+def findpow(n, factors):
+    res = []
+    for i in factors:
+        count = 0
+        a=n
+        while(a >= i):
+            if a % i == 0:
+                count += 1
+            a = a/i
+        res.append((i,count))
+    return res
+
+# Computing sum and number of divisors
+def compute(n):
+    prime_factors = findpow(n, [i for i in soe(n) if n%i == 0])
+    Dn = 1
+    Sn = 1
+    for i in prime_factors:
+        pk,ek = i
+        Dn *= (ek+1)
+        Sn *= (pk**(ek+1) - 1)//(pk - 1)
+    
+    return Dn,Sn
