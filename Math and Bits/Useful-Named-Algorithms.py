@@ -44,7 +44,7 @@ def gcd(A,B):
         return gcd(B, A%B)
   
 """
-4. Number of divisors and Sum of divisors:
+3. Number of divisors and Sum of divisors:
 
 To compute these two quanitities we find the prime factorisation of the number n. Such that n = p1^e1 . p2^e2 .... pk^ek. 
 Where pk is the kth prime factor and ek is its exponent value. For finding prime factors we may use Sieve of Eratosthenes,
@@ -76,3 +76,6 @@ def compute(n):
         Sn *= (pk**(ek+1) - 1)//(pk - 1)
     
     return Dn,Sn
+
+
+
