@@ -65,9 +65,7 @@ same as the iterative solution and also utilises theta(n) auxillary space for th
 """
 def swap(s,i,j):
     s = list(s)
-    t = s[i]
-    s[i] = s[j]
-    s[j] = t
+    s[i],s[j] = (s[j],s[i])
     s = "".join(s)
     return s 
 
