@@ -199,5 +199,32 @@ def leader(arr):
 
 """
 7. Maximum Difference Problem:
+
+We are required to find the largest value of arr[j] - arr[i] considering j > i at all times. A simple pyhonic O(n)
+solution is to divide into two arrays and subtract the min of the left subarray from the max of the right subarray. 
+Slicing in python arr[a:b] takes time complexity O(b-a). Hence all slicing here is O(n/2 - 0) = O(n), computing max/min
+occurs in O(n) time as well, However this solution uses O(n) auxillary space. To further optimise this solution, we can
+keep track of only minimum value in array and check if diff is larger than current diff. This would take O(1) space.
 """
+
+def maxdiff1(arr):
+    if len(arr) % 2 != 0:
+        arr1 = arr[:(len(arr)//2)+1]
+        arr2 = arr[(len(arr)//2):]
+    else:
+        arr1 = arr[:(len(arr)//2)]
+        arr2 = arr[(len(arr)//2):]
+    return max(arr2) - min(arr1)
+
+def maxdiff2(arr):
+    diff = arr[1] - arr[0] # initial difference
+    minval = arr[0] # initial min val
+    for i in range(2, len(arr)):
+        # saving current difference in diff if its better
+        diff = max(diff, arr[i]- minval)
+        # updating minval if its smaller
+        minval = min(minval, arr[i])
+    return diff
+
+
 
