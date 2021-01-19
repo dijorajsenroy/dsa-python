@@ -227,4 +227,47 @@ def maxdiff2(arr):
     return diff
 
 
+"""
+8. Maximum Consecutive 1s in a Binary Array:
 
+We will make a naive O(n*n) solution first, which first checks if current element is 1, then goes into a loop,
+for checking if there are consecutive 1s. Alternatively we can easily reset the count each time the loop encounters
+a 0 and thus incrementing the count on each 1 would give the length of streaks. the max one is saved in O(n) time and
+Theta(1) auxillary space.
+"""
+def max1(arr):
+    res = 0
+    # loop to traverse through elements
+    for i in range(0, len(arr)):
+        count = 0
+        # if current element is 1
+        if arr[i] == 1:
+            # checking consecutive 1s and breaking if not
+            for j in range(i, len(arr)):
+                if arr[j] == 1:
+                    count += 1
+                else:
+                    break
+        # computing max number of consecutive 1s
+        res = max(res, count)
+    return res
+
+def max1opt(arr):
+    count = 0; res = 0
+    for i in range(0,len(arr)):
+        if arr[i] == 0:
+            # reset the count when 0 is encountered
+            count = 0
+        else:
+            count += 1
+            res = max(res, count)
+    return res
+    
+"""
+9. Minimum Consecutive Flips:
+
+We have a binary array and our target is to make all elements of the array same. We can do this by flipping all
+0s or flipping all 1s. We use the fact that the groups of one and zero occur the same number of times or with a 
+difference of one. Thus as a rule we can always flip the second rule as it gives either same or one less number
+of flips.
+"""
