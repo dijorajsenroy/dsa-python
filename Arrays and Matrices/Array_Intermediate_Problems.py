@@ -39,8 +39,9 @@ overflow. Thus the water contained at ith bar = min(lmax, rmax) - arr[i](height 
 water, this solution takes O(n*n) time. We can optimise this solution and make it O(n) time by making two arrays to store
 lmax and rmax of all elements, thus making space complexity O(n).
 
-trapwater = lambda arr: sum([min(max(arr[i:]), max(arr[:i+1])) - arr[i] for i in range(1, len(arr)-1)])
 """
+trapwater = lambda arr: sum([min(max(arr[i:]), max(arr[:i+1])) - arr[i] for i in range(1, len(arr)-1)])
+
 def rainwater(arr):
     water = 0
     for i in range(1, len(arr)-1):
@@ -72,43 +73,57 @@ def rainwaterOn(arr):
         
 """
 3. Majority Element Problem:
+
+An element in an array is called a majority if it appears more than n/2 times. The simple pythonic O(n*n) solution
+is to use list count in a loop traversing the arrays. The efficient solution takes O(1) auxillary space and
+O(n) time complexity. It is known as Murray's Voting Algorithm. The first phase of the algorithm, finds a candidate,
+if there is a majority element the candidate is the majority element. The second phase checks if the candidate is 
+the majority element in the array. The second phase is not required if there is always a majority element in the array.
+In the first phase we intialise the first element as majority and take its count=1. Then we traverse the array and check
+if the current element is the same as the majority. If same, we increment count, if its not then we decrement. if count is
+0 we reset both the current majority and count
 """
-"""
-4. Frequencies in a Sorted Array:
-"""
-def freqsorted(arr):
-    count = 0
-    arr.append(-1) # dummy element
+
+def majority(arr):
+    for i in range(len(arr)):
+        if arr.count(arr[i]) > len(arr)//2:
+            return i
+    return -1
+
+def murrayvoting(arr):
+    # 1st phase gives a candidate for majority element
+    res = 0
+    count = 1
     for i in range(1, len(arr)):
-        if arr[i-1] == arr[i]:
+        if arr[res] == arr[i]:
             count += 1
         else:
-            print(arr[i-1], count+1)
-            count = 0
+            count -= 1
+        if count == 0:
+            # resetting
+            res = i
+            count = 1
+    # 2nd phase to check majority element:
+    if arr.count(arr[res]) > len(arr)//2:
+        return res
+    else:
+        return -1
 
 """
-5. Frequencies in an Unsorted Array
-"""
-# O(n*n) pythonic solution
-
-def freqsorted1(arr):
-    # obtain the list of unique numbers in arr
-    uniq = list(set(arr))
-    for i in uniq:
-        print(i, arr.count(i))
-
-"""
-6. Sliding Window Technique:
+4. Equillibrium Index of Array:
 """
 """
-7. Prefix Sum Technique:
+5. Sliding Window Technique:
 """
 """
-8. Maximum Sum Sub-Array:
+6. Prefix Sum Technique:
 """
 """
-9. Longest Even Odd Sub-Array:
+7. Maximum Sum Sub-Array:
 """
 """
-10. Maximum Circular Sum Sub-Array:
+8. Longest Even Odd Sub-Array:
+"""
+"""
+9. Maximum Circular Sum Sub-Array:
 """
