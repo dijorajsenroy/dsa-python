@@ -124,6 +124,7 @@ takes O(n) time complexity and O(1) space complexity.
 def removedups1(arr):
     res = []
     for i in arr:
+        # in performs search taking O(n) time
         if i not in res: 
             res.append(i)
     return len(res)
@@ -263,11 +264,21 @@ def max1opt(arr):
             res = max(res, count)
     return res
     
-"""
-9. Minimum Consecutive Flips:
 
-We have a binary array and our target is to make all elements of the array same. We can do this by flipping all
-0s or flipping all 1s. We use the fact that the groups of one and zero occur the same number of times or with a 
-difference of one. Thus as a rule we can always flip the second rule as it gives either same or one less number
-of flips.
 """
+9. Frequencies in a Sorted Array:
+
+Simply adding a dummy element to make sure last element is considered, and checking consecutive pairs to count
+frequencies. Count is set to 0 when new element is encountered. Since array is sorted, this gives the count
+of the groups of elements and thus the frequencies in O(n) time complexity and O(1) auxillary space.
+"""
+
+def freqsorted(arr):
+    count = 0
+    arr.append(-1)  # dummy element
+    for i in range(1, len(arr)):
+        if arr[i-1] == arr[i]:
+            count += 1
+        else:
+            print(arr[i-1], count+1)
+            count = 0
