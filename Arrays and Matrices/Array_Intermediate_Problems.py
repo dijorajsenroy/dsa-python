@@ -163,6 +163,52 @@ def SlindingWindow(arr, k):
     return maxsum
 
 """
+5.B. Find subarray with specified sum: 
+
+A variation of the sliding window problem is the value of k not being specified, For example, for a given array of 
+non-negative integers, we have to find if the array contains a subarray whose sum is equal to the given value of sum. 
+We can do this in O(n) time, but only if all the elements are positive. The efficient O(n) solution is a modified
+Sliding window approach, where we compare the sum of the window with the given sumval and if its smaller then we add 
+the next element, if its lesser then we subtract the previous elements of the window. In this way we need not compute
+the k window when all elements are positive and our objective is just to find the sum.
+"""
+def findSubarraySum(arr, n, sumval):
+    curr_sum = arr[0]; start = 0
+    for i in range(1, len(arr)+1):
+        # If curr_sum exceeds the sum, then remove the starting elements
+        while (curr_sum > sumval and start < i-1):
+            curr_sum -= arr[start]
+            start += 1
+        # If curr_sum becomes equal to sum, then return true
+        if (curr_sum == sumval):
+            print("Sum found between indexes %d and %d", start, i-1)
+            return True
+        # Add this element to curr_sum
+        if (i < n):
+            curr_sum += arr[i]
+    # If we reach here, then no subarray
+    print("No subarray found")
+    return False
+
+"""
+5.C. N-bonacci Problem:
+
+The N-bonacci problem is the larger version of fibonacci(n=2). Thus every element in an N-bonacci series, is the sum of the
+previous n elements. in fibonacci since n=2 we take sum of previous two elements. We need to print m N-bonacci numbers.
+We initialise the first n-1th and nth numbers as 0 and 1. Then we use the sliding window technique to form a window that
+computes the sum of the previous n elements. for example in {0,0,1,1,X} where n = 3, we have ith element X = 1+1+0, and i-1th
+element 1 = 1+0+0. We derive the relation that ith element = 2* i-1th element - i-n-1th element.
+"""
+def nBonacci(n, m):
+    # initialise result array
+    a = [0 for i in range(m)]
+    a[n-1] = 1; a[n] = 1
+    # Using sliding window
+    for i in range(n+1, m):
+        a[i] = 2 * a[i - 1] - a[i - n - 1]
+    return a
+
+"""
 6. Prefix Sum Technique:
 """
 """
