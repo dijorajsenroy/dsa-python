@@ -129,13 +129,44 @@ def MurraysVotingAlgorithm(arr):
         return -1
 
 """
-6. Sliding Window Technique:
+5.A. Sliding Window Technique:
+
+We are given an array, we need to find the maximum sum of k consecutive elements. The naive solution is simple, for every
+beginning point at i we compute the next j<i+k elements and find their sum. We save the max sum in a variable. Using pythonic
+array slicing method, this becomes more efficient. Slicing is O(k) for every element, thus, the time complexity is O(k*n).
+We can however to this in O(n) time complexity using the sliding window technique. The steps in this algorithm ar as follows:
+(i) Compute the sum of the first window, ie from 0 to k elements of the array. Initialise the current sum variable and the 
+variable that stores the maximum sum of all windows (ie, maxsum), with this value.
+(ii) Run a loop from i=k to i=n elements to traverse through the rest of the windows. To make a window for currsum slide, we
+have to add the ith element to it so the window moves forward and subtract the first element of the previous window (i-k th).
+[1,2,3,4,5], k=3
+first window = [[1,2,3], 4, 5] currsum = 1+2+3 
+to currsum add 4 subtract 1:
+second window = [1,[2,3,4], 5] currsum = 1+2+3+4-1 = 2+3+4 and so forth.
+(iii) Compare the currsum (window sum) with maximum and save it. If the problem is to find a given sum, this step would be to
+check equality and return True if the window sum is equal to the given sum.
+"""
+
+import sys
+def maxksum(arr,k):
+    res  = - sys.maxsize
+    for i in range(k, len(arr)+1):
+        res = max(res, sum(arr[i-k: i])) # O(k)
+    return res
+
+def SlindingWindow(arr, k):
+    # sum of first window elements:
+    currsum = sum(arr[:k]); maxsum = currsum
+    for i in range(k, len(arr)):
+        currsum += arr[i] - arr[i-k]
+        maxsum = max(currsum, maxsum)
+    return maxsum
+
+"""
+6. Prefix Sum Technique:
 """
 """
-7. Prefix Sum Technique:
-"""
-"""
-8. Maximum Sum Sub-Array:
+7. Maximum Sum Sub-Array:
 
 Given an array we have to compute the maximum sum that a subarray of the array posesses, where a subarray is a subset of
 contiguous elements present in the array. When there are negative elements the max sum is not the sum of all elements. Thus 
@@ -175,9 +206,69 @@ def KadanesAlgorithm(arr):
         maxSubarraySum = max(maxSubarraySum, maxEndingSum)
     return maxSubarraySum
 
+
 """
-9. Longest Even Odd Sub-Array:
+8. Longest Even Odd Sub-Array:
+
+Find the length of the longest subarray that has alternating even-odd elements. The elements should be contiguous in nature.
+The naive solution takes O(n*n) time and we traverse the whole loop to check all the subarrays of the array. We use modulus
+conditions to check if the numbers are alternating even-odd or odd-even. The efficient solution of this problem can be done
+in one traversal of the array. For every ith element we either extend the previous subarray (if it is alternating with i-1),
+or start a new subarray by resetting the subarray length count variable. This would take O(n) time complexity.
 """
+def evenOddSubarraySumN(arr):
+    res = 0
+    for i in range(len(arr)):
+        count = 0
+        for j in range(i+1, len(arr)):
+            # condition to check alternating j-1th and jth elements.
+            if((arr[j-1] % 2 == 0 and arr[j] % 2 != 0) or (arr[j-1] % 2 != 0 and arr[j] % 2 == 0)):
+                count += 1
+        res = max(res, count)
+    return res
+
+def evenOddSubarraySum(arr):
+    count = 1; maxcount = 1
+    for i in range(1, len(arr)):
+        # continuing the subarray from i-1 th element
+        if((arr[i-1] % 2 == 0 and arr[i] % 2 != 0) or (arr[i-1] % 2 != 0 and arr[i] % 2 == 0)):
+            count += 1
+            maxcount = max(count, maxcount)
+        # starting a new subarray by resetting the count variable
+        else:
+            count = 1
+    return maxcount
+
 """
-10. Maximum Circular Sum Sub-Array:
+9. Maximum Sum of Circular Sub-Arrays:
+
+A circular sub array includes normal subarrays but also the subarrays formed by connecting the last element of the array with
+the first element. For the Naive O(n*n) solution we take every i element and compute all subarrays for it, including the circular
+subarrays and compute the current subarray sum. Then we take the maximum of these values. The i loop is to traverse the elements,
+and j is used to generate subarrays of ith element. 
+
+The efficient solution utilises Kadanes algorithm to compute sum for all normal subarrays. We treat the sum of circular subarrays
+separately and then find the maximum of the two values. To solve this problem in O(n) time complexity the steps are as follows:
+(i) Find normal max subarray sum using Kadane's algorithm
+(ii) To compute max sum of circular subarrays the result is equal to the sum of the array - the min sum of normal subarrays
+This is because we see that in circular subarrays we dont include the minimum sum normal subarrays, and the elements of circular
+subarrays usually remain the same. Thus the total sum - minimum normal subarray sum gives the max circular subrray sum.
+(iii) To compute minimum subrray sum, we invert the sign of all array elements and then use Kadane's max sum algorithm. On inverted
+numbers the max sum is the min sum for the original array numbers.
 """
+
+def circularSubarraySum1(arr):
+    res = arr[0]
+    for i in range(0, len(arr)):
+        currsum = 0
+        for j in range(1, len(arr)):
+            idx = (i+j) % len(arr) # starts again from 0 for values > n
+            currsum += arr[idx] # computing circular subarray sum for ith element
+        res = max(res, currsum)
+    return res
+
+def circularSubarraySum(arr):
+    normalMaxSubarraySum = KadanesAlgorithm(arr = arr) # O(n) time
+    total = sum(arr)
+    normalMinSubarraySum = KadanesAlgorithm(arr = [-i for i in arr])
+    return max(normalMaxSubarraySum, total + normalMinSubarraySum)
