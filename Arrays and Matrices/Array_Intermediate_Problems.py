@@ -163,7 +163,7 @@ def SlindingWindow(arr, k):
     return maxsum
 
 """
-5.B. Find subarray with specified sum: 
+5.B. Find subarray with specified sum (Positive Arrays): 
 
 A variation of the sliding window problem is the value of k not being specified, For example, for a given array of 
 non-negative integers, we have to find if the array contains a subarray whose sum is equal to the given value of sum. 
@@ -318,3 +318,5 @@ def circularSubarraySum(arr):
     total = sum(arr)
     normalMinSubarraySum = KadanesAlgorithm(arr = [-i for i in arr])
     return max(normalMaxSubarraySum, total + normalMinSubarraySum)
+
+
