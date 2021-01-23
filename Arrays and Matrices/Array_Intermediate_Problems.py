@@ -208,9 +208,58 @@ def nBonacci(n, m):
         a[i] = 2 * a[i - 1] - a[i - n - 1]
     return a
 
+
 """
-6. Prefix Sum Technique:
+6.A. Prefix Sum Technique:
+
+Given a fixed array we are required to find the most efficient way to process multiple sum queries. For example a function
+getSum(start, end) should return the sum off arr[start:end+1]. The pythonic method is to do it using list/array slicing,
+thus getSum(start, end) = sum(arr[start:end+1]) in O(n) time complexity. Another method would be to use the prefix sum 
+technique, which is useful when there are many queries on the same array. We preprocess the array so that the multiple
+queries made to the array take O(1) time complexity. To do this we compute the prefix sum array, where prefixsum(i) = 
+sum of arr[0:i]. Each element is just the sum of the array ending with it. Thus when a query is made we can just index the sum.
+For example, Array = [2,8,3,9,6,5,4], Prefix Sum Array = [2, 10, 13, 22, 28, 33, 37]. The code to perform this is given here:
+
+To answer queries we need to keep in mind that every arr[i] now stores sum of all elements till i. Thus asking for the sum of 
+elements in range (m,n) will be the nth element - the m-1th element. if m is zero then m-1 is also taken to be zero.
 """
+def prefixsum(arr):
+    # O(n) preprocessing 
+    for i in range(1, len(arr)):
+        arr[i] = arr[i-1] + arr[i]
+    return arr
+
+def sumqueries(arr):
+    # for a large number of queries
+    arr = prefixsum(arr)
+    ip = input("Enter start and end: ").split(" ")
+    start = int(ip[0]); end = int(ip[1])
+    start = 0 if start == 0 else start - 1
+    return arr[end] - arr[start]
+
+"""
+6.B. Given n ranges [(x1,y1), (x2,y2)...(xn, yn)] find the most commony appearing element in the n ranges:
+
+The Naive solution is to compute the frequencies of m elements in n ranges in a hash table. This gives the most commonly
+appearing element in O(n) time. A pythonic method can be to extend all the lists to compute one list comprising of mxn elements,
+Then using Murrays Voting algorithm we can compute the most commonly appearing element in O(m*n) time. We can implement the
+Prefix Sum Technique when the ranges are limited, as in 0 <= (xn,yn) <= 1000. We can solve this problem in O(n) time complexity.
+The steps involved in this process:
+(i) Make a dynamic array(list) of size 1000. For each index, we mark presence of the start of ranges in the array by incrementing
+the corresponding index in the list. Then we mark the end of the ranges by decrementing its corresponding index in the list.
+(ii) Thus when we compute prefix sum array of the list, at each element we would end up with the frequency of the index.
+(iii) To get the index of the max element we can use pythonic functions or Murray's Voting Algorithm.
+"""
+
+def maxInNranges(x,y):
+    n = len(x)
+    maxOcc = [0 for _ in range(1000)]
+    for i in range(n):
+        maxOcc[x[i]] += 1
+        maxOcc[y[i]+ 1] -= 1
+    maxOcc = prefixsum(maxOcc)
+    return maxOcc.index(max(maxOcc))
+
 """
 7. Maximum Sum Sub-Array:
 
