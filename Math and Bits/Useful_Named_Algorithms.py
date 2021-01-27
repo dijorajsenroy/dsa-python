@@ -77,5 +77,22 @@ def compute(n):
     
     return Dn,Sn
 
-
+"""
+4. Pigeonhole Principle:
+"""
+"""
+5. Inclusion Exclusion Principle:
+"""
+"""
+6. Fermat's Little Theorem:
+"""
+"""
+7. Lucas' Theorem:
+"""
+"""
+8. Chinese Remainder Theorem:
+"""
+"""
+9. Modulo Inverse and Extended Euclidean Algorithm:
+"""
 
