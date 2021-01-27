@@ -77,3 +77,30 @@ def permute(s, i=0):
         for j in range(i, len(s)):
             permute(s=swap(s, i, j), i = i+1)
             
+"""
+5. Binary to Gray Code Problem using Recursion:
+
+Gray code is a variation of binary code in which the difference between two consecutive bits is always 1. This propert makes it useful for K-maps,
+and many other applications. For example, the n-bit gray codes are given below for some values of n. n = 2:
+00 01 11 10
+n = 3: 000 001 011 010 110 111 101 100 and so forth.
+We have a given binary number and we are required to convert it to gray code. We consider the last two bits of the number and compare them, 
+if they are same we have to convert or else we retain the numbers. for a number n, we follow the steps:
+(i) base-case is at n==0, where we return 0 to previous call.
+(ii) If last two digits are same, ie either 11 or 00 we divide by 10 and pass to the next call, whose result is multiplied by 10. thus 11 becomes
+10 and 100 becomes 10. Ensuring that bits are opposite.
+(iii) If last two digits are opposite we add 1 to its recursive call to make sure it stays inverted.
+"""
+
+def binary_to_gray( n ): 
+    if not(n): 
+        return 0
+    # Taking last digit     
+    a = n % 10
+     # Taking second last digit 
+    b = int(n / 10) % 10
+    # If last digit are opposite bits 
+    if (a and not(b)) or (not(a) and b): 
+        return (1 + 10 * binary_to_gray(int(n / 10))) 
+    # If last two bits are same 
+    return (10 * binary_to_gray(int(n / 10)))
