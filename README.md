@@ -18,20 +18,20 @@ briefly describing the implementation of the algorithm. If the algorithm is take
 
 (A) Math and Bits
 
-For popular named algorithms add the code in Useful-Named-Algorithms.py
-For Bit Maniplation problems add the code in Bit_Manipulation.py
-For general math problems add the code in Math_Problems.py
+For popular named algorithms add the code in Useful-Named-Algorithms.py.
+For Bit Maniplation problems add the code in Bit_Manipulation.py.
+For general math problems add the code in Math_Problems.py.
 
 (B) Recursion
 
-For recursion problems there are three files for easy, intermediate and classic problems. Add the code accordingly
+For recursion problems there are three files for easy, intermediate and classic problems. Add the code accordingly.
 
 (C) Arrays and Matrices
 
-For introductory problems on 1D array add the code to Array_Basic_Problems.py
-For intermediate problems on 1D array add the code to Array_Intermediate_Problems.py
-For Matrix algorithms add the code to Matrix_Problems.py
-For popular CP problems add the code to Important_Problems_1.py 
+For introductory problems on 1D array add the code to Array_Basic_Problems.py.
+For intermediate problems on 1D array add the code to Array_Intermediate_Problems.py.
+For Matrix algorithms add the code to Matrix_Problems.py.
+For popular CP problems add the code to Important_Problems_1.py.
 
 (D) Strings
 
