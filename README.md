@@ -9,17 +9,26 @@ My codes, and materials for Data Structures and Algorithms, and important interv
 3. Array and Matrix Problems
 4. String Manipulation Problems
 
-# Instructions for contribution:
+# Content and Contribution:
 
-The files are all in .py files, all codes are python implementations in form of fucntions. To describe what the function does please add a docstring above it,
-briefly describing the implementation of the algorithm. 
+The files are all in .py files, all codes are python implementations in form of functions. To describe what the function does please add a docstring above it,
+briefly describing the implementation of the algorithm. If the algorithm is taken from a particular source, like Hackerrank or Leetcode, mention that as well.
 
-(A)
-For common math, bit manipulation problems add code with docstring in the respective file in Math and Bits/..
-For populare named algorithms add the code in Useful-Named-Algorithms.py
+(A) Math and Bits
+For popular named algorithms add the code in Useful-Named-Algorithms.py
+For Bit Maniplation problems add the code in Bit_Manipulation.py
+For general math problems add the code in Math_Problems.py
 
-(B)
+(B) Recursion
 For recursion problems there are three files for easy, intermediate and classic problems. Add the code accordingly
 
-(C)
-For Arrays and Matrices, There are files for basic array manipulation, intermediate problems, etc. 
+(C) Arrays and Matrices
+For introductory problems on 1D array add the code to Array_Basic_Problems.py
+For intermediate problems on 1D array add the code to Array_Intermediate_Problems.py
+For Matrix algorithms add the code to Matrix_Problems.py
+For popular CP problems add the code to Important_Problems_1.py 
+
+(D) Strings
+(E) Searching and Sorting
+(F) Hashing Techniques
+
