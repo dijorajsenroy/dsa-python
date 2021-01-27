@@ -1,6 +1,6 @@
 # Placement and Interview Questions
 
-My codes, and materials for Data Structures and Algorithms, and important interview problems from competitive coding platforms. Main resource is Geeks for geeks questions, contribute and add important questions and solutions accordingly, best of luck for interviews!
+My codes, and materials for Data Structures and Algorithms, and important interview problems from competitive coding platforms. Main resource is Geeks for geeks for theory and questions are from GFG, Hackerrank and Leetcode, do contribute and add important questions and solutions accordingly, best of luck for interviews!
 
 # In the Repository:
 
@@ -8,8 +8,10 @@ My codes, and materials for Data Structures and Algorithms, and important interv
 2. Classic Recursion Problems
 3. Array and Matrix Problems
 4. String Manipulation Problems
+5. Searching and Sorting Problems
+6. Hashing Problems
 
-# Content and Contribution:
+# Contribution Guideline:
 
 The files are all in .py files, all codes are python implementations in form of functions. To describe what the function does please add a docstring above it,
 briefly describing the implementation of the algorithm. If the algorithm is taken from a particular source, like Hackerrank or Leetcode, mention that as well.
