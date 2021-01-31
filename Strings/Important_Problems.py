@@ -117,7 +117,37 @@ def patternMatchingNaive(text, pat):
 5(ii) Rabin Karp Algorithm for Pattern Matching:
 
 This algorithm also takes worse-case time complexity O((n-m + 1)* m) but performs better than Naive solution in average cases.
+The idea of this algorithm is simple, the steps involved are:
+(i) Slide the pattern string over the text, like in the Naive solution
+(ii) Instead of comparing with each i:n-m substring, compute a hash value of the substring window.
+(iii) If the hash value matches with the pattern only then we match individual characters. 
+(iv) To prevent the computation of hash value of text window to be O(m), we use a sliding window like approach called Rolling Hash.
+In this approach, we subtract the ASCII value of last element of previous window and add the ASCII value of next element, hence
+Sliding virtually over the text for searching. if t(i) is the rolling hash value of the ith window, and m is length of pattern,
+We have the expression t(i+1) = t(i) - ord(text[i]) + ord(text[i+m]). We can have more complicated hash functions that reduce
+the number of false hits than the hash value sum matching technique. 
 """
+def RabinKarpAlgorithm(text, pat):
+    n = len(text); m = len(pat)
+    # Computing hash value of pattern
+    patHashVal = 0
+    for i in pat:
+        patHashVal += ord(i)
+
+    # Initialising rolling hash window value
+    rollingHashWindow = 0
+    for i in text[:m]
+        rollingHashWindow += ord(i)
+    
+    # Comparing sliding value with pattern to minimise hits
+    for i in range(m, n):
+        if rollingHashWindow == patHashVal:
+            # Executes lesser than naive solution
+            if text[i-m:i] == pat:
+                print(i-m)
+        # Sliding the hash value window over the text
+        rollingHashWindow += ord(text[i]) - ord(text[i-m])
+
 """
 5(iii) KMP Algorithm for Pattern Matching:
 """
