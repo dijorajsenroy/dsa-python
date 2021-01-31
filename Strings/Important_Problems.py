@@ -50,7 +50,8 @@ def anagram(s1, s2):
 
 In a given string we have to compute the character that is repeating in nature and its first occurrence is left-most. The naive O(n*n)
 solution is to compute if the ith element exists in the i+1 to n substring. A better method is to use the count array approach. 
-We make a dictionary of the elements, without set because set is unordered and we need to perserve the order.
+We make a dictionary of the elements, without set because set is unordered and we need to perserve the order. To find the left-most
+non repeating element too we take the same approach, only changing the amount of counts required. 
 """
 def leftMostRepeatingCharNaive(s):
     for i in range(len(s)):
@@ -69,10 +70,6 @@ def leftMostRepeatingChar(s):
             if s.count(i) > 1: # O(n)
                 return s.index(i)
 
-"""
-3. Left-Most non repeating element:
-
-"""
 def leftMostNonRepeatingChar(s):
     d = dict.fromkeys(s)
     d = dict(zip(d.keys(), [0 for _ in d]))
