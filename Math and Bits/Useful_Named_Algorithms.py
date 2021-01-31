@@ -78,21 +78,36 @@ def compute(n):
     return Dn,Sn
 
 """
-4. Pigeonhole Principle:
+4. Compute e^x using Taylor Series (Recursive solution):
+
+n denotes the number of terms of Taylor Series taken into consideration. The expansion of e^x is:
+e^x = 1 + (x^1/1!) + (x^2/2!)...n times. The recursion is computed with the help of global variables.
+In C/Cpp these would be variables defined using the static keyword. We cannot make it tail recursion 
+but we can simplify the code by making these computations parametric in nature.
+f --> computes factorial, p --> computes power of x, n --> is decremented to keep track of terms
+"""
+def e(x, p=1.0, f=1.0, n=10):
+    if n == 0:
+        return s
+    else:
+        return (p/f) + e(x, p = p*x, f = f*n, n-1)
+
+"""
+5. Pigeonhole Principle:
 """
 """
-5. Inclusion Exclusion Principle:
+6. Inclusion Exclusion Principle:
 """
 """
-6. Fermat's Little Theorem:
+7. Fermat's Little Theorem:
 """
 """
-7. Lucas' Theorem:
+8. Lucas' Theorem:
 """
 """
-8. Chinese Remainder Theorem:
+9. Chinese Remainder Theorem:
 """
 """
-9. Modulo Inverse and Extended Euclidean Algorithm:
+10. Modulo Inverse and Extended Euclidean Algorithm:
 """
 
