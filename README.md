@@ -16,10 +16,10 @@ My codes, and materials for Data Structures and Algorithms, and important interv
 The files are all in .py files, all codes are python implementations in form of functions. To describe what the function does please add a docstring above it,
 briefly describing the implementation of the algorithm. If the algorithm is taken from a particular source, like Hackerrank or Leetcode, mention that as well.
 
-(A) Math and Bits
-*For popular named algorithms add the code in Useful_Named_Algorithms.py.
-*For Bit Maniplation problems add the code in Bit_Manipulation.py.
-*For general math problems add the code in Math_Problems.py.
+- Math and Bits
+  - For popular named algorithms add the code in Useful_Named_Algorithms.py.
+  - For Bit Maniplation problems add the code in Bit_Manipulation.py.
+  - For general math problems add the code in Math_Problems.py.
 
 (B) Recursion
 *For recursion problems there are three files for easy, intermediate and classic problems. Add the code accordingly.
