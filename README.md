@@ -31,7 +31,8 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - For popular CP problems add the code to Important_Problems_1.py.
 
 - Strings
-  - Single file containing common problems and algorithms, Important_Problems_1.py.
+  - File containing common problems and algorithms, Important_Problems_1.py.
+  - For Pattern Matching algorithms add the code to Pattern_Matching.py
 
 - Searching and Sorting
 
