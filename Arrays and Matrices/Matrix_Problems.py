@@ -219,3 +219,56 @@ def median(mat):
             flat.append(mat[i][j])
     flat = sorted(flat)
     return flat[rows*cols//2]
+
+"""
+8. Spiral Pattern Matrix:
+
+example 1:
+rows = cols = 4
+00 01 02 03
+10 11 12 13
+20 21 22 23
+30 31 32 33
+spiral traversal: 00 01 02 03, 13 23 33, 32 31 30, 20 10, 11 12, 22 21
+
+example 2:
+rows = 2, cols = 4
+00 01 02 03
+10 11 12 13
+
+spiral traversal: 00 01 02 03, 13 12 11 10
+
+example 3:
+rows = 4, cols = 2
+00 01
+10 11
+20 21
+30 31
+
+"""
+def printSpiral(a):
+    k = 0; l = 0; m = len(a); n = len(a[0])
+    while (k < m and l < n):
+        # Print the first row from remaining rows
+        for i in range(l, n):
+            print(a[k][i], end=" ")
+        k += 1
+
+        # Print the last column from remaining columns
+        for i in range(k, m):
+            print(a[i][n - 1], end=" ")
+        n -= 1
+
+        # Print the last row from the remaining rows
+        if (k < m):
+            for i in range(n - 1, (l - 1), -1):
+                print(a[m - 1][i], end=" ")
+            m -= 1
+
+        # Print the first column from the remaining columns
+        if (l < n):
+            for i in range(m - 1, k - 1, -1):
+                print(a[i][l], end=" ")
+            l += 1
+            
+           
