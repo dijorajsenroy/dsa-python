@@ -35,6 +35,10 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - For Pattern Matching algorithms add the code to Pattern_Matching.py
 
 - Searching and Sorting
+  - Searching algorithms are in Searching_Algorithms.py
+  - Search problems are in Searching_Problems.py
+  - Sorting algorithms are in Sorting_Algorithms.py
+  - Sorting problems are in Sorting_Problems.py
 
 - Hashing Technique
 
