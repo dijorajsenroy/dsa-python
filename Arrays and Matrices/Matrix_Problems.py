@@ -2,20 +2,16 @@
 1. Matrix Operations:
 
 (i) Addition - O(m*n)
-
 res(i,j) = a(i,j) + b(i,j)
 
 (ii) Subtraction - O(m*n)
-
 res(i,j) = a(i,j) - b(i,j)
 
 (iii) Multiplication - O(m*n*p)
-
 m x n * n * p = m * p
 res(0,0) = a(0,0) * b(0,0) + a(0,1) * b(1,0) + a(0,2) * b(2,0) 
 res(0,1) = a(0,0) * b(0,1) + a(0,1) * b(1,1) + a(0,2) * b(2,1) 
 res(i,j) = a(i,k=0) * b(k=0,j) + a(i,k=1) * b(k=1,j) + a(i,k=2) * b(k=2,j)
-
 Therefore, res(i,j) = Summation(0<=k<p) { a(i,k) * b(k,j) }
 
 """
@@ -223,7 +219,7 @@ def median(mat):
 """
 8. Spiral Pattern Matrix:
 
-example 1:
+example:
 rows = cols = 4
 00 01 02 03
 10 11 12 13
@@ -231,20 +227,12 @@ rows = cols = 4
 30 31 32 33
 spiral traversal: 00 01 02 03, 13 23 33, 32 31 30, 20 10, 11 12, 22 21
 
-example 2:
-rows = 2, cols = 4
-00 01 02 03
-10 11 12 13
-
-spiral traversal: 00 01 02 03, 13 12 11 10
-
-example 3:
-rows = 4, cols = 2
-00 01
-10 11
-20 21
-30 31
-
+The Algorithm: 
+(i)Create and initialize variables k – starting row index, m – ending row index, l – starting column index, n – ending column index
+(ii)Print the top row, i.e. Print the elements of the kth row from column index l to n, and increase the count of k.
+(iii)Print the right column, i.e. Print the last column or n-1th column from row index k to m and decrease the count of n.
+(iv)Print the bottom row, i.e. if k < m, then print the elements of m-1th row from column n-1 to l and decrease the count of m
+(v)Print the left column, i.e. if l < n, then print the elements of lth column from m-1th row to k and increase the count of l.
 """
 def printSpiral(a):
     k = 0; l = 0; m = len(a); n = len(a[0])
