@@ -161,10 +161,56 @@ def anagramSearch(txt, pat):
     if count_txt == count_pat:
         print("Found at, ", len(txt)-len(pat))
     
+"""
+7. Longest Substring with Distinct Characters:
 
+In a given string compute the longest substring with all distinct characters. There are two approaches to this solution, with
+different time complexities. The Naive O(n**3) solution for this problem is given here:
+
+(i) Consider all substrings beginning with a character i and compute the one with distinct characters. To check distinct chars
+we compare the length of the set of the characters with the length of the string.
+
+(ii) for the jth character in a string we compute maxEnd(j), which denotes the length of the longest substring that ends with j
+and has all distinct characters. Our result is the max of this value. To compute maxEnd(j) we need to derive a relation between
+maxEnd(j) and maxEnd(j-1). For the example: ABCADBD, we have maxEnd(0) = 1 always. the remaining maxEnd values are:
+maxEnd[] = [1(A), 2(AB), 3(ABC), 3(BCA), 4(BCAD), 4(CADB), 2(DB)]. 
+
+Therefore for here we can understand there are two conditions for maxEnd:
+----> if s[j] is not present in maxEnd[j-1], then maxEnd(j) = maxEnd(j-1) + 1
+----> if s[j] is present in maxEnd(j-1), then maxEnd(j) =  j - prevIndexof(s[j]) + 1
+----> if j = 0, maxEnd(j) = 1
 """
-7. Lexicographic Rank of a string:
-"""
-"""
-8. Longest Substring with Distinct Characters:
-"""
+
+def LSwDCnaive(s):
+    subs = []
+    for i in range(len(s)):
+        for j in range(i+1, len(s)+1):
+            subs.append(s[i:j])
+
+    res = ""
+    for sub in subs:
+        if len(set(sub)) == len(sub) and len(sub) >= len(res):
+            # all elements are unique
+            res = sub
+    return res
+
+def longestSubstrDistinct(s):
+    # O(n*n) solution
+    maxEnd = 1 # for 0th index of string
+    sub = s[0]; res = -1
+    for i in range(1,len(s)):
+
+        if s[i] not in sub:
+            sub = sub + s[i]
+            maxEnd += 1
+        else:
+            prev_idx = 0
+            for j in range(len(sub)):
+                if s[i] == sub[j]:
+                    prev_idx = j
+
+            maxEnd = i - prev_idx + 1
+
+        res = max(res, maxEnd)
+    return res
+
