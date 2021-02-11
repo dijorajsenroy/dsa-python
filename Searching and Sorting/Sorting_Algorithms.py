@@ -104,18 +104,18 @@ simultaneously in Theta(m+n) time and compare two indices to find the smaller on
 
 For example in an array: [3,2,1,0], the recursion is going to be as follows:
 recursive calls:		 [3,2,1,0]
-						 /      / 
-					[3,2]      [1,0]
-					/   /      /   / 
-				  [3]  [2]   [1]   [0] ---> (base-case) return these values and backtrack
+				 /      / 
+			     [3,2]      [1,0]
+			     /   /      /   / 
+			   [3]  [2]   [1]   [0] ---> (base-case) return these values and backtrack
 
 backtracking:     [3]  [2]   [1]   [0] ---> returning values to prev calls (base-case)
-				   /   /      /    /
-				f([3],[2])   f([1],[0])
-				  [2,3]       [0,1]
-				    /          /
-				  f([2,3],[0,1])
-				  [0, 1, 2, 3] ---> return sorted result
+		   /   /      /    /
+		f([3],[2])   f([1],[0])
+		[2,3]       [0,1]
+		  /          /
+		f([2,3],[0,1])
+		[0, 1, 2, 3] ---> return sorted result
 
 where f is the efficient Theta(m+n) merge function of two arrays
 """
@@ -230,16 +230,16 @@ Naive Partition is stable but slower, in comparison Hoares and Lomuto is faster 
 (ii) (low, pivot) and (pivot+1, high) are sorted till there are no unsorted elements left in the subarray in base-case,
 low >= high is only true when there is 1 element or no unsorted elements in array. We return at this point.
 For example:                [9, 4, 3, 1, 10, |5|]
-							pivot = 5, pivot_idx = 3
-							[1, 4, 3, |5|, 10, 9]
-							/                /
-						QS(0,2)            QS(4,5)
-					 [1,4,|3|]		       [10, |9|]
-			pivot = 3, idx = 1				pivot = 9, idx = 4
-				[1,|3|, 4]					[|9|, 10]
-				/		/					/		/
-			QS(0,0)   QS(4,4)			QS(4,4)   QS(5, 5)
-			return	  return			return	   return
+			   pivot = 5, pivot_idx = 3
+			    [1, 4, 3, |5|, 10, 9]
+			     /                /
+			QS(0,2)            QS(4,5)
+		     [1,4,|3|]		   [10, |9|]
+	     pivot = 3, idx = 1		   pivot = 9, idx = 4
+	            [1,|3|, 4]		   [|9|, 10]
+	            /	    /		   /	  /
+		QS(0,0)   QS(4,4)	QS(4,4)   QS(5, 5)
+		return	  return	return	   return
 
 """
 
