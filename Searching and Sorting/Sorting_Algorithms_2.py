@@ -1,9 +1,73 @@
 """
 1. Cycle Sort:
+
+Cycle Sort is a worst-case O(n^2) algorithm with the property that it executes the minimum number of memory writes to sort an array. It is in-place 
+but not stable in nature. The idea here is to traverse the array and for each element compute the number of elements smaller than that element.
+In the sorted array this would be the position of that element and as we swap it exactly once to its rightful place. The initial value at that
+memory location becomes our new item to swap. With each swap we can say that elements 0 to i (swapped index) is sorted and we need check only
+the remaining sub-array, which means we can start counting position (or count) from i itself. We start from count = i but if count remains i, it
+means that the element at i is at its rightful place in which case we exit from the loop when i == count. This algorithm needs to be modified slightly,
+to deal with duplicate elements. To make sure we subsititute an item at the right position, each time a count is obtained, before swapping we check if the
+position should be swapped, if it should, we take the last occurrence of the number to be swapped with the item. To obtain the number of memory writes, increment
+a variable each time you execute a swap. 
 """
+
+def cycleSortDistinct(arr):
+    n = len(arr)
+    for i in range(n):
+        item = arr[i]
+        count = 0
+        # count elements smaller than item
+        for j in range(i + 1, n):
+            if arr[j] < item:
+                count += 1
+        # swap item at its rightful position
+        arr[count], item = item, arr[count]
+        # loop to determine the position of new item, unless position is correct. 
+        while(count != i):
+            # starting count from i as 0 to i-1 is sorted.
+            count = i
+            # obtaining position in unsorted subarray
+            # if count is unchanged then we have correct position.
+            for j in range(i + 1, n):
+                if arr[j] < item:
+                    count += 1
+            
+def cycleSortDuplicates(arr):
+    n = len(arr)
+    for i in range(n):
+        item = arr[i]
+        count = 0
+        # count elements smaller than item (obtain position)
+        for j in range(i + 1, n):
+            if arr[j] < item:
+                count += 1
+        # If the item is already there, this is not a cycle.
+        if count == i:
+            continue
+        else:
+            # Otherwise, put the item there or right after any duplicates.
+            while item == arr[count]:
+                count += 1
+            arr[count], item = item, arr[count]
+        # loop to determine the position of new item, unless position is correct.
+        while(count != i):
+            # starting count from i as 0 to i-1 is sorted.
+            count = i
+            # obtaining position in unsorted subarray
+            # if count is unchanged then we have correct position.
+            for j in range(i + 1, n):
+                if arr[j] < item:
+                    count += 1
+            # put the item after any duplicates is applicable.
+            while arr[count] == item:
+                count += 1
+            arr[count], item = item, arr[count]
+            
 """
 2. Heap Sort:
 """
+
 """
 3. Counting Sort:
 
