@@ -35,10 +35,11 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - For Pattern Matching algorithms add the code to Pattern_Matching.py
 
 - Searching and Sorting
-  - Searching algorithms and problems are in Searching_Problems.py
+  - Searching algorithms and problems are in Searching_Algorithms.py
   - Selection, Insertion, Bubble, Merge and Quick Sort algorithms are in Sorting_Algorithms_1.py
   - Cycle, Heap, Counting, Radix and Bucket Sort algorithms are in Sorting_Algorithms_2.py
   - Common Sorting problems are in Sorting_Problems.py
+  - Common Searching problems are in Searching_Problems.py
 
 - Hashing Technique
 
