@@ -106,5 +106,28 @@ def countSort(arr, k):
 """
 """
 5. Bucket Sort:
+
+Bucket Sort is an algorithm that sorts in linear time when the data is uniformly distributed across a range of real numbers. The idea is to first divide the range
+into multiple buckets of equal space. Then we traverse through the input elements and we put the elements into their respective buckets. After this we sort the individual
+buckets so that when we combine the buckets the output array obtained is also sorted. For a uniform distribution if we have n numbers and k buckets, on an average,
+one bucket should have n/k elements. if this number is small enough, we can use insertion sort to sort the individual buckets. Joining and ditribution happens in linear
+time and sorting each bucket is assumed to be constant for smaller values of n/k. The steps in this algorithm are as follows:
+(i) Compute maximum and use it as range of values to compute the range of each bucket. The number of buckets is taken as an argument. We make a nested list with k
+lists to represent the buckets.
+(ii) To determine which bucket an element arr[i] falls into, we use the formula (numOfBuckets * arr[i] / max(arr))
+(iii) Sort the individual buckets, if the n/k ratio is small this takes almost constant amount of time. Combine the buckets and obtain the sorted array.
 """
+
+def bucketSort(arr, numOfBuckets = 4):
+    n = len(arr)
+    m = max(arr) + 1
+    buckets = [[None] for _ in range(numOfBuckets)]
+    result = []
+    # push each element into it's respective bucket
+    for i in range(n):
+        buckets[(numOfBuckets * arr[i]) // m].append(arr[i])
+    # sort each indidual bucket and combine
+    for b in buckets:
+        result += sorted(b[1:])
+    return result
 
