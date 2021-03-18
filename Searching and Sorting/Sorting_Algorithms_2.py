@@ -16,8 +16,9 @@ def cycleSortDistinct(arr):
     n = len(arr)
     for i in range(n):
         item = arr[i]
-        count = 0
-        # count elements smaller than item
+        # starting count from i as 0 to i-1 is sorted.
+        count = i
+        # count elements smaller than item.
         for j in range(i + 1, n):
             if arr[j] < item:
                 count += 1
@@ -25,19 +26,21 @@ def cycleSortDistinct(arr):
         arr[count], item = item, arr[count]
         # loop to determine the position of new item, unless position is correct. 
         while(count != i):
-            # starting count from i as 0 to i-1 is sorted.
             count = i
             # obtaining position in unsorted subarray
             # if count is unchanged then we have correct position.
             for j in range(i + 1, n):
                 if arr[j] < item:
                     count += 1
+            # swap item at its rightful position
+            arr[count], item = item, arr[count]
             
 def cycleSortDuplicates(arr):
     n = len(arr)
     for i in range(n):
         item = arr[i]
-        count = 0
+        # starting count from i as 0 to i-1 is sorted.
+        count = i
         # count elements smaller than item (obtain position)
         for j in range(i + 1, n):
             if arr[j] < item:
