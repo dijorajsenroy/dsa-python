@@ -41,6 +41,10 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - Common Sorting problems are in Sorting_Problems.py
   - Common Searching problems are in Searching_Problems.py
 
-- Hashing Technique
+- Hashing Techniques
+  - Problems are contained in Hashing_Problems_1.py
+
+- Stacks and Queues
+  - Stack.py Queues.py Contain the implementation and sub-types
 
 
