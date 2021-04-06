@@ -1,24 +1,5 @@
 """
-1. Stocks Buy and Sell Problem:
-
-We have an array containing stock prices. Find the maximum profit made for all pairs of cost and selling price of 
-stock that are present in the array. Simply we have to find the peaks and the bottom points, we buy stock at bottom
-points and sell at peak, and thus we make maximum profit. The O(n) solution of this problem is as follows:
-
-This solution is based on the simple idea that we don't need to keep track of peaks and troughs, we can add the diff
-of all the consecutive elements uphill and cumulatively that will give us the diff between trough and peak, and over
-all such troughs and peaks we get max profit easily.
-"""
-def stocks(arr):
-    profit = 0
-    for i in range(1, len(arr)):
-        if arr[i] > arr[i-1]:
-            # adds to profit as long as we are uphill
-            profit += arr[i] - arr[i-1]
-    return profit
-
-"""
-2. Trapping Rain Water:
+1. A. Total Amount of Water Trapped:
 
 We have an array, whose values represent heights of bars. If the bars are arranged in the order of the array elements,
 we have to compute how much water can be trapped between the first and last bar. We take the value of elements as one
@@ -69,7 +50,11 @@ def rainwaterOn(arr):
         res += min(lmax[i], rmax[i]) - arr[i]
 
     return res
-        
+
+"""
+2. Container with largest area or Most water:
+
+"""
 """
 3. Equillibrium Index of Array:
 
@@ -135,14 +120,17 @@ We are given an array, we need to find the maximum sum of k consecutive elements
 beginning point at i we compute the next j<i+k elements and find their sum. We save the max sum in a variable. Using pythonic
 array slicing method, this becomes more efficient. Slicing is O(k) for every element, thus, the time complexity is O(k*n).
 We can however to this in O(n) time complexity using the sliding window technique. The steps in this algorithm ar as follows:
+
 (i) Compute the sum of the first window, ie from 0 to k elements of the array. Initialise the current sum variable and the 
 variable that stores the maximum sum of all windows (ie, maxsum), with this value.
+
 (ii) Run a loop from i=k to i=n elements to traverse through the rest of the windows. To make a window for currsum slide, we
 have to add the ith element to it so the window moves forward and subtract the first element of the previous window (i-k th).
 [1,2,3,4,5], k=3
 first window = [[1,2,3], 4, 5] currsum = 1+2+3 
 to currsum add 4 subtract 1:
 second window = [1,[2,3,4], 5] currsum = 1+2+3+4-1 = 2+3+4 and so forth.
+
 (iii) Compare the currsum (window sum) with maximum and save it. If the problem is to find a given sum, this step would be to
 check equality and return True if the window sum is equal to the given sum.
 """
@@ -172,6 +160,7 @@ Sliding window approach, where we compare the sum of the window with the given s
 the next element, if its lesser then we subtract the previous elements of the window. In this way we need not compute
 the k window when all elements are positive and our objective is just to find the sum.
 """
+
 def findSubarraySum(arr, n, sumval):
     curr_sum = arr[0]; start = 0
     for i in range(1, len(arr)+1):
@@ -289,7 +278,6 @@ def maxSumNaive(arr):
             res = max(res, currsum) 
     return res
 
-
 def KadanesAlgorithm(arr):
     # max ending sum initialised with first element
     maxEndingSum = arr[0]
@@ -300,7 +288,6 @@ def KadanesAlgorithm(arr):
         # saving max subarray sum
         maxSubarraySum = max(maxSubarraySum, maxEndingSum)
     return maxSubarraySum
-
 
 """
 8. Longest Even Odd Sub-Array:
@@ -344,10 +331,13 @@ and j is used to generate subarrays of ith element.
 
 The efficient solution utilises Kadanes algorithm to compute sum for all normal subarrays. We treat the sum of circular subarrays
 separately and then find the maximum of the two values. To solve this problem in O(n) time complexity the steps are as follows:
+
 (i) Find normal max subarray sum using Kadane's algorithm
+
 (ii) To compute max sum of circular subarrays the result is equal to the sum of the array - the min sum of normal subarrays
 This is because we see that in circular subarrays we dont include the minimum sum normal subarrays, and the elements of circular
 subarrays usually remain the same. Thus the total sum - minimum normal subarray sum gives the max circular subrray sum.
+
 (iii) To compute minimum subrray sum, we invert the sign of all array elements and then use Kadane's max sum algorithm. On inverted
 numbers the max sum is the min sum for the original array numbers.
 """
