@@ -55,7 +55,7 @@ def merge2arr(a, b):
 3. Count inversions in Array:
 """
 """
-4. Kth Smallest Element:
+4. K-th Smallest Element:
 """
 """
 5. Chocolate Distribution Problem:
@@ -68,11 +68,8 @@ def merge2arr(a, b):
 7. Minimum difference in Array:
 """
 """
-8. Merge Overlapping intervals:
+8. Merge Overlapping Intervals:
 """
 """
 9. Meeting the maximum guests:
-"""
-"""
-10. Merge K sorted Arrays (Hard): 
 """
