@@ -115,31 +115,27 @@ def sqrootBS(x):
 """
 4. Find peak element:
 
-In an array of distinct integers we are required to find peak elements,ie, the elements that are greater than its neighbour. We can return
-any of these elements in case there are more than one. The naive solution would be to check for such triplets in Linear time, However we 
-can use Binary Search to do this in O(log N) time.
+The Naive solution would be to slide a triplet window over the array in O(n) time, checking for peak. This problem can be solved in
+O(log N) time by using binary search. Here, we check if a mid is the peak element, meaning the following condition has to hold true:
+arr[mid] > arr[mid - 1] and arr[mid] > arr[mid + 1] for mid in range (1, N - 2). Here, the side where the element is greater than mid,
+has the peak and we will shift the subarray in the direction of the greater element accordingly. 
 """
-def peakElementBS(arr):
+def peakElement(arr):
     low = 0; high = len(arr) - 1
     while low <= high:
         mid = (low + high) // 2
-        if mid != 0 or mid != len(arr) - 1:
-            left = arr[mid - 1]
-            right = arr[mid + 1]
-            peak = arr[mid]
-            if left < peak and peak > left:
-                # peak found at mid
-                return mid
-            elif left > peak:
-                # if left element is greater checking for it's peak 
-                high = mid - 1
-            elif right > peak:
-                # if right element is greater checking for it's peak
-                low = mid + 1
-            else:
-                pass
-    return -1
-
+        # check if mid is a peak
+        c1 = mid == 0 or arr[mid - 1] <= arr[mid]
+        c2 = mid == len(arr) - 1 or arr[mid + 1] <= arr[mid]
+        if c1 and c2:
+            return mid
+        elif arr[mid - 1] >= arr[mid]:
+            # peak exists in 0 to mid - 1
+            high = mid - 1
+        else:
+            # peak exists in mid + 1 to len(arr) - 1
+            low = mid + 1
+    return - 1 
 
 """
 5. Missing and Repeating Numbers :
@@ -160,7 +156,3 @@ def miss_rep_optimal(n, arr):
 """
 6. Allocate minimum pages:
 """
-"""
-7. Majority Element:
-"""
-
