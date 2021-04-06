@@ -1,4 +1,6 @@
 """
+OVERVIEW OF PATTERN MATHCING ALGORITHMS:
+
 A given pattern string is given and we are required to find all the indices at which we find the the pattern string. There are many
 algorithms that can be used for pattern searching. Given here is an overview of the algos, pattern len - m, text len - n,
 (i) Naive solution:
@@ -14,7 +16,10 @@ algorithms that can be used for pattern searching. Given here is an overview of 
       Worst Case Time Complexity: O(n = len(pattern)) 
       Auxillary Space: O(m = len(text))
 (iv) Suffix Tree (built using Tries): O(m) Time Complexity, Text is pre-processed - preferable for fixed length text.
+     (Refer to Tries folder)
+"""
 
+"""
 (i) Naive Solution:
 
 The Naive solution idea is simple, we slide the pattern over the entire text and print the location at which its found.
