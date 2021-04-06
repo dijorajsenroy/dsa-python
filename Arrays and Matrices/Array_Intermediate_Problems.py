@@ -368,4 +368,30 @@ def circularSubarraySum(arr):
     normalMinSubarraySum = KadanesAlgorithm(arr = [-i for i in arr])
     return max(normalMaxSubarraySum, total + normalMinSubarraySum)
 
+"""
+10. Two Sum and Three Sum Problems:
 
+Given a sorted array and a sum k find a pair/triplet of numbers with the sum k. The O(n) approach is to use 2 pointers
+l = 0 and r = N-1
+(i) When the sum arr[r] + arr[l] < k, we need to increase the sum by incrementing l
+(ii)When the sum arr[r] + arr[l] > k, we need to decrease the sum by decrementing r
+For triplets problem we use the pairs function for every ith element. This takes O(n^2) time
+"""
+
+def pairSum(arr, k, start, end):
+    l  = start; r = end
+    while l < r :
+        s = arr[r] + arr[l]
+        if s == k:
+            return True
+        elif s < k:
+            l += 1
+        else:
+            r -= 1
+    return False
+
+def tripletSum(arr, k):
+    for i in range(len(arr)):
+        if pairSum(arr, k - arr[i], i + 1, len(arr) - 1):
+            return True
+    return False
