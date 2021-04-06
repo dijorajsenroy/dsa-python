@@ -81,22 +81,86 @@ def countOcc(arr, k):
 """
 2. A. Search in an Infinite Sized Array:
 """
-
 """
 2. B. Search in a Sorted Rotated Array:
 """
 """
 3. Square Root Problem:
+
+Given a number compute floor() of it's square root without using any library functions. A naive O(n) solution is to travserse an array
+of i = 1 to n and check for i*i == n. This can be optimised to reduce numbers searched, for example, doing i = 1 to n//2 etc. To do it in
+Theta(log X) we use binary search to traverse the array in the same way. The conditions for finding the square root for a mid:
+(i) if arr[mid]**2 == n then return arr[mid]
+(ii) if arr[mid]**2 < n then square root exists in right half, update low to mid + 1
+(iii) if arr[mid]**2 > n then square root exists in left half, update high to mid - 1
 """
+def sqrootBS(x):
+    low = 0; high = x - 1
+    while low <= high:
+        mid = (low + high) // 2
+        sq = mid*mid
+        # check for square root at mid
+        if sq == x:
+            return mid
+        # update low and high otherwise
+        elif sq > x:
+            # sq root in left half
+            high = mid - 1
+        else:
+            # sq root in right half
+            low = mid + 1
+            ans = mid
+    return ans
+
 """
-4. Find peak elements:
+4. Find peak element:
+
+In an array of distinct integers we are required to find peak elements,ie, the elements that are greater than its neighbour. We can return
+any of these elements in case there are more than one. The naive solution would be to check for such triplets in Linear time, However we 
+can use Binary Search to do this in O(log N) time.
 """
+def peakElementBS(arr):
+    low = 0; high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if mid != 0 or mid != len(arr) - 1:
+            left = arr[mid - 1]
+            right = arr[mid + 1]
+            peak = arr[mid]
+            if left < peak and peak > left:
+                # peak found at mid
+                return mid
+            elif left > peak:
+                # if left element is greater checking for it's peak 
+                high = mid - 1
+            elif right > peak:
+                # if right element is greater checking for it's peak
+                low = mid + 1
+            else:
+                pass
+    return -1
+
+
 """
-5. Repeating Elements:
+5. Missing and Repeating Numbers :
+
+The most obvious solution would be to search for each element in O(nlog N) time using a loop to traverse the array along with binary search,
+But using hashtable/count array this can be done in constant time.
 """
+def miss_rep_optimal(n, arr):
+    countarr = [0] * n
+    for i in range(len(arr)):
+        countarr[arr[i]] += 1
+    for i in countarr:
+        if i == 0:
+            yield "Missing: {i}" 
+        if i > 1:
+            yield "Repeating: {i}"
+
 """
 6. Allocate minimum pages:
 """
 """
-7. Two pointer approach:
+7. Majority Element:
 """
+
