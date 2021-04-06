@@ -38,42 +38,7 @@ max(arr)
 min(arr)
 
 """
-1. Merging two sorted arrays:
-
-Two sorted arrays of sizes m, n have to be merged into an array of size m+n. We need to ensure that the
-resulting array is sorted as well. For this purpose we traverse the two arrays and compare the ith index
-simultaneously and choose the the smaller option. When we reach the end of one of the arrays we copy the
-remaining elements to the final array. The time complexity of this solution is O(m+n).
-"""
-def merge(arr1, arr2):
-    m = len(arr1); n = len(arr2)
-    # creating an array of m+n dims
-    arr3 = a.array('i', [0] * (m+n))
-    i = 0; j = 0; k = 0
-    # while the two loop variables are smaller than lengths
-    while(i < m and j < n):
-        # checking smaller element
-        if arr1[i] < arr2[j]:
-            # copying and incrementing arr3 and arr1 elements
-            arr3[k] = arr1[i]
-            k += 1; i += 1
-        else:
-            # copying and incrementing arr3 and arr2 elements
-            arr3[k] = arr2[j]
-            k += 1; j += 1
-    # copying the remaining elements:
-    # of 1st array:
-    while i < m:
-        arr3[k] = arr1[i]
-        k += 1; i += 1
-    # of second array
-    while j < m:
-        arr3[k] = arr2[j]
-        k += 1; j += 1
-    return arr3
-
-"""
-2. Array Rotations (by 1 or D places): 
+1. Array Rotations (by 1 or D places): 
 
 Left rotating an array by one place means simply adding the 0th element to the end of the array.
 In fixed sized arrays append operations don't exist. So we need to copy the 0th element in a temp variable,
@@ -107,7 +72,7 @@ def leftRotatebyD(arr, d):
     return arr
 
 """
-3. Remove Duplicates from sorted array:
+2. Remove Duplicates from sorted array:
 
 The first method has O(n^2) time because of 'in' operator being used on an unhashable
 sequential data type, and O(n) space complexity because new array is being created.
@@ -148,7 +113,7 @@ def removedups3(arr):
     return res
 
 """
-4. Largest and second largest elements:
+3. Largest and second largest elements:
 """
 import sys
 def max2(arr):
@@ -160,7 +125,7 @@ def max2(arr):
     return fmax, smax
 
 """
-5. Move Zeroes to the right end of the array:
+4. Move Zeroes to the right end of the array:
 
 The Naive solution is simple and uses two loops. The first one is to find a ai = 0, the second
 one is to swap it with the first non-zero element to its right. This takes O(n*n) time, and instead,
@@ -181,7 +146,7 @@ def moveZeros(arr):
     return arr
 
 """
-6. Leaders in an Array Problem:
+5. Leaders in an Array Problem:
 
 An element is a leader in an array if there is no element to its right that is greater than itself. A
 naive solution is to find the maximum element in the sum array of each index. Thus it takes O(n*n) time.
@@ -199,7 +164,7 @@ def leader(arr):
             print(curr_leader)
 
 """
-7. Maximum Difference Problem:
+6. Maximum Difference Problem:
 
 We are required to find the largest value of arr[j] - arr[i] considering j > i at all times. A simple pyhonic O(n)
 solution is to divide into two arrays and subtract the min of the left subarray from the max of the right subarray. 
@@ -229,7 +194,7 @@ def maxdiff2(arr):
 
 
 """
-8. Maximum Consecutive 1s in a Binary Array:
+7. Maximum Consecutive 1s in a Binary Array:
 
 We will make a naive O(n*n) solution first, which first checks if current element is 1, then goes into a loop,
 for checking if there are consecutive 1s. Alternatively we can easily reset the count each time the loop encounters
@@ -266,7 +231,7 @@ def max1opt(arr):
     
 
 """
-9. Frequencies in a Sorted Array:
+8. Frequencies in a Sorted Array:
 
 Simply adding a dummy element to make sure last element is considered, and checking consecutive pairs to count
 frequencies. Count is set to 0 when new element is encountered. Since array is sorted, this gives the count
