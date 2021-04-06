@@ -276,4 +276,21 @@ def tripletSum(arr, k):
             return True
     return False
 
+"""
+10. Stocks Buy and Sell Problem:
 
+We have an array containing stock prices. Find the maximum profit made for all pairs of cost and selling price of 
+stock that are present in the array. Simply we have to find the peaks and the bottom points, we buy stock at bottom
+points and sell at peak, and thus we make maximum profit. The O(n) solution of this problem is as follows:
+
+This solution is based on the simple idea that we don't need to keep track of peaks and troughs, we can add the diff
+of all the consecutive elements uphill and cumulatively that will give us the diff between trough and peak, and over
+all such troughs and peaks we get max profit easily.
+"""
+def stocks(arr):
+    profit = 0
+    for i in range(1, len(arr)):
+        if arr[i] > arr[i-1]:
+            # adds to profit as long as we are uphill
+            profit += arr[i] - arr[i-1]
+    return profit
