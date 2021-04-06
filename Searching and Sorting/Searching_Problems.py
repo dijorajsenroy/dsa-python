@@ -79,13 +79,33 @@ def countOcc(arr, k):
         return -1
 
 """
-2. A. Search in an Infinite Sized Array:
+2. Search in an Infinite Sized Array:
+
+We are given an infinite sized sorted array and an element k to be searched in the array. To implement binary search for this problem,
+we need to compute an upper bound for which we know that k exists in the bound. To do this we take powers of the 2 as the index until 
+an index is encountered for which arr[i] > k. This is the high which we will use in the binary search algorithm. 
+"""
+def binarySearchInf(arr, k):
+    uppbound = 1
+    while arr[uppbound] < k:
+        uppbound *= 2
+    # implementing binary search
+    low = 0; high = uppbound
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] == k:
+            return mid
+        elif arr[mid] < k:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
+
+"""
+3. Search in a Sorted Rotated Array:
 """
 """
-2. B. Search in a Sorted Rotated Array:
-"""
-"""
-3. Square Root Problem:
+4. Square Root Problem:
 
 Given a number compute floor() of it's square root without using any library functions. A naive O(n) solution is to travserse an array
 of i = 1 to n and check for i*i == n. This can be optimised to reduce numbers searched, for example, doing i = 1 to n//2 etc. To do it in
@@ -113,7 +133,7 @@ def sqrootBS(x):
     return ans
 
 """
-4. Find peak element:
+5. Find peak element:
 
 The Naive solution would be to slide a triplet window over the array in O(n) time, checking for peak. This problem can be solved in
 O(log N) time by using binary search. Here, we check if a mid is the peak element, meaning the following condition has to hold true:
@@ -138,7 +158,7 @@ def peakElement(arr):
     return - 1 
 
 """
-5. Missing and Repeating Numbers :
+6. Missing and Repeating Numbers :
 
 The most obvious solution would be to search for each element in O(nlog N) time using a loop to traverse the array along with binary search,
 But using hashtable/count array this can be done in constant time.
@@ -154,5 +174,5 @@ def miss_rep_optimal(n, arr):
             yield "Repeating: {i}"
 
 """
-6. Allocate minimum pages:
+7. Allocate minimum pages:
 """
