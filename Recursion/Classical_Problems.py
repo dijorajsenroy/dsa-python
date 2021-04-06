@@ -67,24 +67,15 @@ def subsets(arr, sumval, curr = [], index= 0):
                 curr = curr + [new_elem], 
                 index = index + 1)
         
-#subsets([10, 20,15], 35)
-#print(len(count))
 
-# Solution using parameters to compute sum - lesser auxillary space.
 
+# Tail Recursive Solution - lesser auxillary space.
 def countSubsets(arr, index, sumval):
     if index == 0:
         return 1 if sumval == 0 else 0
     else:
         return (countSubsets(arr, index = index - 1, sumval = sumval)
                 + countSubsets(arr, index = index - 1, sumval = sumval + arr[index-1]))
-
-#array = [ int(i) for i in str(input()) if i != " "]
-#sumval = int(input())
-#countSubsets(arr = array,
-            #index = len(array),
-            #sumval = sumval)
-
 
 """
 3. Tower of Hanoi Problem:
