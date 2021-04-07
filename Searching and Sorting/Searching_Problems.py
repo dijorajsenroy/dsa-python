@@ -103,7 +103,28 @@ def binarySearchInf(arr, k):
 
 """
 3. Search in a Sorted Rotated Array:
+
+We are given an array that is sorted and rotated anti=clockwise an unknown number of times, and a number k to search for in the array.
+It is known that at all times one half (left or right) is always sorted. Using this info we modify the binary search algorithm this way:
+At a given mid, to check which half is sorted we compare mid with the corner element. if a[0] < a[mid] then left half is sorted and
+a[mid] < a[-1] then right half is sorted. We compare k in the sorted range and eliminate the half of the array where k doesn't exist.
 """
+
+def binarySearchRotArr(arr, k):
+    low = 0; high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        # k is at mid
+        if arr[mid] ==  k:
+            return mid
+        # left half is sorted and k is in left half or k is in right half
+        if (arr[0] < arr[mid]) and (k <= arr[mid] and k >= arr[0]):
+            high = mid - 1
+        else:
+            low = mid + 1
+    return -1
+
+
 """
 4. Square Root Problem:
 
