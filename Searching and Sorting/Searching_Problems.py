@@ -193,7 +193,3 @@ def miss_rep_optimal(n, arr):
             yield "Missing: {i}" 
         if i > 1:
             yield "Repeating: {i}"
-
-"""
-7. Allocate minimum pages:
-"""
