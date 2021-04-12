@@ -162,7 +162,73 @@ def unionSet(a1, a2):
         
 """
 3. Count inversions in Array:
+
+A pair of elements in an array such that the greater element occurs before the smaller element is called an inversion.
+onditions: arr[i] > arr[j] for i < j. For a sorted array there are 0 inversions, for a reverse sorted array there are 
+n*(n-1)/2 inversions. The simple algorithm to do this is to check all pairs and count in O(n*n) time. Using Merge Sort,
+We can do this in O(nlogn) time complexity. While we are recursively sorting the two halves, we are also counting the
+inversions. The steps in this algorithm are described below:
+For every inversion (x, y) where x > y, the possibilities are -
+case 1: both x and y lie in left half (handled by recursively counting in left half)
+case 2: both x and y lie in right half (handled by recursively counting in right half)
+case 3: x lies in left half and y lies in right half (case 1 and case 2 eventually reach case 3 with recursive calls. 
+The merge function has to be modified to handle case 3, and that will recursively handle cases 1 and 2). The merge fucntion:
+Merge the left and right half like the normal merge function, but for the condition right[j] > left[i],
+the elements satisfy the condition of being inversions so we count them as such. to count inversions we increment it by mid - i,
+where i is the position of the inverted element. 
 """
+def countInversionNaive(arr):
+    count = 0 
+    for i in range(len(arr) - 1):
+        for j in range(i + 1, len(arr)):
+            if arr[i] > arr[j]:
+                count += 1
+                print(arr[i], arr[j])
+    return count
+
+# Function to Use Inversion Count (code from Geeks for Geeks)
+def countInversions(arr):
+    temp_arr = [0]* len(arr)
+    return _mergeSort(arr, temp_arr, 0, len(arr) - 1)
+
+# Function to use MergeSort to Count Inversions
+def _mergeSort(arr, temp_arr, left, right):
+    inv_count = 0
+    if left < right:
+        mid = (left + right)//2
+        # inversion counts in the left subarray
+        inv_count += _mergeSort(arr, temp_arr, left, mid)
+        # inversion counts in right subarray
+        inv_count += _mergeSort(arr, temp_arr, mid + 1, right)
+        # merge two sorted subarrays
+        inv_count += merge(arr, temp_arr, left, mid, right)
+    return inv_count
+
+# Function to merge 2 sorted subarrays
+def merge(arr, temp_arr, left, mid, right):
+    i = left     # Starting index of left subarray
+    j = mid + 1  # Starting index of right subarray
+    k = left     # Starting index of to be sorted subarray
+    inv_count = 0
+    while i <= mid and j <= right:
+        # There will be no inversion if arr[i] <= arr[j]
+        if arr[i] <= arr[j]:
+            temp_arr[k] = arr[i]; i += 1
+        else:
+            # Inversion will occur
+            temp_arr[k] = arr[j]; j += 1
+            inv_count += (mid - i + 1)
+        k += 1
+    # Copy the remaining elements into temp array
+    while i <= mid:
+        temp_arr[k] = arr[i]; k += 1; i += 1
+    while j <= right:
+        temp_arr[k] = arr[j]; k += 1; j += 1
+    # Copy the sorted subarray into original array
+    for i in range(left, right + 1):
+        arr[i] = temp_arr[i]
+    return inv_count
+
 """
 4. Kth Smallest Element:
 """
