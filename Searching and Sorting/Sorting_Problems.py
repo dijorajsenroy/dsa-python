@@ -116,9 +116,13 @@ def intersection(a1, a2):
 Given two sorted arrays print the all the elements in both arrays, but the duplicate elements should be printed only once.
 If the arrays are unsorted we can use the Hash set data structure to solve this in linear time. For the efficient solution,
 There are the following cases for every a1[i] and a2[j] 0 <= i < m, 0 <= j < n:
+
 (i) In case of repeating element(x > 0 and a[x - 1] == a[x]) in a1 and a2, we skip them to its last occurrence.
+
 (ii) if a1[j] < a2[j] we print a1[i] and increment i
+
 (iii) if a1[j] > a2[j] we print a2[j] and increment j
+
 (iv) in case a1[i] == a2[j] we print either and increment both i and j.
 This loop ensures that all the smaller non-duplicate elements in either arrays have been printed. To print the remaining
 larger elements we use individual while loops and the same loop variables(that stores the last printed index), while 
@@ -159,7 +163,7 @@ def unionSet(a1, a2):
     a1 = a1.union(a2)
     for i in a1:
         print(i)
-        
+
 """
 3. Count inversions in Array:
 
@@ -186,7 +190,7 @@ def countInversionNaive(arr):
                 print(arr[i], arr[j])
     return count
 
-# Function to Use Inversion Count (code from Geeks for Geeks)
+# Function to Use Inversion Count
 def countInversions(arr):
     temp_arr = [0]* len(arr)
     return _mergeSort(arr, temp_arr, 0, len(arr) - 1)
@@ -227,26 +231,122 @@ def merge(arr, temp_arr, left, mid, right):
     # Copy the sorted subarray into original array
     for i in range(left, right + 1):
         arr[i] = temp_arr[i]
+
     return inv_count
+
 
 """
 4. Kth Smallest Element:
+
+We are given a number k and an unsorted array. The task is to find out the kth smallest element in the array. The naive method
+to do this is to sort the array in O(nlogn) time and index the k - 1th element. Using Quick Sort (Lomuto) as a subroutine is
+a better method with an average case time complexity of O(n), and worst case O(n*n). The task of the lomuto partition func is 
+to put the last element of the array to its correct position in the sorted array, meaning all elements before it are smaller
+and after it are larger. The Quick Sort function calls this partition function recursively on the left and right half to put
+each element in its correct place in the array. Since lomuto partitition puts an element after all the elements smaller than it
+and returns index, and the index returned by it is k, then it is the kth smallest element. 
+p, arr = lomutoPartition(arr)
+arr = [0...i|p|j....n] where 0 to i < p < j to n
+case 1: if k - 1 > p: look for k - 1 in right subarray (or greater elements)
+case 2: if k - 1 < p: look for k - 1 in left subarray (or smaller elements)
+case 3: if k - 1 == p: kth smallest element is found.
 """
+
+def kthsmallest(arr, k):
+    low = 0; high = len(arr) - 1
+    while low <= high:
+        p = lomutoPartition(arr, low, high)
+        if k - 1 == p:
+            return p
+        elif k - 1 < p:
+            high = p - 1
+        else:
+            low = p + 1
+            
+# function to compute lomuto partitioned array
+def lomutoPartition(arr, low, high):
+    """
+    The goal of lomuto partition is to put a pivot (last element) to its rightful position in the array. For this purpose
+    We will maintain two subarrays 0 to i for elements <= pivot, and i+1 to j for elements >= pivot. To do this we start from
+    j = 0 and i = -1 and whenever we encounter an element smaller than pivot in (j+1,n) we add it to the (0,i) subarray by 
+    swapping arr[j] with arr[i + 1] and increment i ++ to increase window size. Lastly, we swap pivot at i + 1 and return. 
+    """
+    pivot = arr[high] # pivot is always last element
+    i = low - 1
+    for j in range(low, high):
+        if arr[j] < pivot:
+            # swap and increase smaller than pivot window
+            arr[i + 1], arr[j] = arr[j], arr[i + 1]
+            i += 1
+    # swap with pivot, new index of pivot is i + 1
+    arr[i + 1], pivot = pivot, arr[i + 1]
+    return i + 1
+
+
 """
 5. Chocolate Distribution Problem:
+
+In an array, index i represents a packet of chocs and arr[i] represents the number of chocs in it. There are m children, we 
+want to distribute the choloclates between m children such that every child gets exactly one packet, and the difference
+between the minimum chocs and maximum chocs received by a child should be minimum. for example in an array [x1,x2..xN]
+we have to pick m elements m_arr = [m1,m2...mM] such that max(m_arr) - min(m_arr) is minimum. The steps in solving this:
+(i) Sort the array in O(nlogn) time complexity
+(ii) Assume the first of m numbers chosen to be the minimum, as we are going in sorted order the mth number should be max.
+So for each arr[i] we need to find arr[i + m - 1] - arr[i] and take the minimum of these values to obtain out answer. 
 """
+
+def chocDist(arr, m):
+    arr.sort()
+    min_val = arr[m - 1] - arr[0]
+    for i in range(1, len(arr)):
+        min_val = min(min_val, arr[i + m - 1] - arr[i])
+    return min_val
+
 """
 6. A. Sort an Array with Two Types of elements:
+
+Can also be asked as Segregate negative and positive elements, Segregate even and odd elements, Sort a binary array. The 
+solution has to be a stable sorting algorithm. This problem can be solved using Lomuto in Theta(n) time and O(1) space.
 """
+
+def sort2types(arr):
+    p = max(arr)
+    i = -1
+    for j in range(len(arr)):
+        if arr[j] < p:
+            arr[i + 1], arr[j] = arr[j], arr[i + 1]
+            i += 1
+    return arr
+
 """
 6. B. Sort an Array with Three Types of elements:
+
+Can also be asked as Sort an array of 0s, 1s, 2s, Three-way partitioning when multiple occurrences of a pivot may exist,
+Partitioning around a range, etc. To solve this problem we will use a standard Hoare's partition variation called the
+Dutch National Flag Algorithm. All the pivot elements should come together or form a range of pivots, we have to maintain
+4 sections in the array, 0 to low consisting of elements smaller than lower range of pivot and l1 to mid should be all pivots
+high to N - 1 should be all greater than higher range of pivot. The 4 parts are: a[1...low], a[low...mid - 1], a[mid... high]
+a[high + 1...N]. If the ith element is 0, we swap it with low and decrement low. if it is 1, we keep it as it is but decrement 
+the (mid, high) range. If it is 2 then we swap it with an element in the high range. 
+Algorithm: 
+(i) Keep three indices low = 1, mid = 1 and high = N and there are four ranges, 1 to low (the range containing 0), 
+low to mid (the range containing 1), mid to high (the range containing unknown elements) and high to N (the range containing 2).
+(ii) Traverse the array from start to end and mid is less than high. (Loop counter is i)
+(iii) If the element is 0 then swap the element with the element at index low and update low = low + 1 and mid = mid + 1
+(iv) If the element is 1 then update mid = mid + 1
+(v) If the element is 2 then swap the element with the element at index high and update high = high – 1.
 """
-"""
-7. Minimum difference in Array:
-"""
-"""
-8. Merge Overlapping intervals:
-"""
-"""
-9. Meeting the maximum guests:
-"""
+
+def sort3types(arr):
+    low = 0; high = len(arr) - 1; mid = 0
+    while mid <= high:
+        if arr[mid] == 0:
+            arr[low], arr[mid] = arr[mid], arr[low]
+            low = low + 1
+            mid = mid + 1
+        elif arr[mid] == 1:
+            mid = mid + 1
+        else:
+            arr[mid], arr[high] = arr[high], arr[mid]
+            high = high - 1
+    return arr
