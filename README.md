@@ -41,10 +41,19 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - Common Sorting problems are in Sorting_Problems.py
   - Common Searching problems are in Searching_Problems.py
 
-- Hashing Techniques
-  - Problems are contained in Hashing_Problems_1.py
-
+- Linked Lists
+  - Single_LList.py contains the implementation and operations on Single Linked List.
+  - Doubled_LList.py contains the implementation and operations on Double Linked List.
+  - LList_Problems.py contain important problems on both Linked Lists.
+  
 - Stacks and Queues
-  - Stack.py Queues.py Contain the implementation and sub-types
+  - Stack.py Queues.py Contain the Implementations and Types
+  - Stack_Problems.py and Queue_Problems.py contain the respective problems
 
+- Trees
+
+- Hashing and Heaps
+  - Problems are contained in Hashing_Problems.py
+  - Heap data structure is explained in Heap.py
+  - Heap problems are there in Heap_Problems.py
 
