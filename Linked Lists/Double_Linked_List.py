@@ -10,13 +10,16 @@ class Node:
 """
 Traversal in both directions:
 """
-def display(head):
+
+def displayFromHead(head):
     curr = head
     print("Forward traversal")
     while(curr is not None):
         print(curr.data)
-        last = curr
         curr = curr.next
+
+def displayFromTail(tail):
+    last = tail
     print("Reverse traversal")
     while(last is not None):
         print(last.data)
@@ -69,7 +72,6 @@ def insertAtEndt(head, tail, data):
     new.next = None
     tail = new
     return head, tail
-
 
 """
 III. Insertion before a given node's reference: This operation can be carried out easily by using prev field
@@ -170,7 +172,13 @@ to given.next so that given is bypassed and before is linked to the node after g
 def deleteGiven(head, given):
     if head is not None:
         if head is given:
-            head = None
+            if head.next is None:
+                head = None
+            else:
+                curr = head.next
+                curr.prev = None
+                head.next = None
+                head = curr
         else:
             # before is the node before given
             before = given.prev
@@ -198,4 +206,3 @@ head = insertBefore(head, given, -1)
 display(head)
 given = head.next
 display(deleteGiven(head, given))
-
