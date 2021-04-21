@@ -61,6 +61,15 @@ def insertAtEnd(head, data):
     new.next = None
     return head
 
+# This can be done in O(1) time if the tail pointer is maintained as well.
+def insertAtEndt(head, tail, data):
+    new = Node(data)
+    tail.next = new
+    new.prev = tail
+    new.next = None
+    tail = new
+    return head, tail
+
 
 """
 III. Insertion before a given node's reference: This operation can be carried out easily by using prev field
@@ -132,6 +141,23 @@ def deleteAtEnd(head):
         print("List is empty")
     return head
 
+# This can be done in O(1) time when we keep track of tail pointer before-hand
+def deleteAtEndt(head, tail):
+    # check if list empty
+    if head is not None:
+        # check if there is only one node
+        if head is tail:
+            head = None
+            tail = None
+        else:
+            # delete tail using tail.prev
+            before = tail.prev
+            tail.prev = None
+            before.next = None
+            tail = before
+    else:
+        print("List is empty")
+    return head, tail
 """
 III. Deletion of a node (reference given): This problem can be done in constant time complexity in case of
 double linked lists by accessing the previous fields of the given node. In single linked lists however, this 
@@ -159,8 +185,6 @@ def deleteGiven(head, given):
     else:
         print("List is empty")
     return head
-
-  
 """
 Implement and Test the functions:
 """
