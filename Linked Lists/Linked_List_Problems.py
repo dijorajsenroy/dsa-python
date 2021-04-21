@@ -11,14 +11,42 @@ direction of the link as curr now points the other way.
 set up the prev node in a way that its reference is now the curr node, and curr and next both point to the node that should be reversed,
 this is repeated till prev becomes the last node.
 (v) When prev is the last node set it as the new head of the list. 
-"""
 
+For Example:
+
+(initially, nxt = cur.next)
+None     [1]---->[2]---->[3]----> None
+prv      cur     nxt
+(cur.next = prv)
+None<----[1]    [2]---->[3]----> None
+(prev = cur; cur = nxt)
+None<----[1]    [2]---->[3]----> None
+         prv    cur,nxt
+
+(second iteration, nxt = cur.next)
+None<----[1]    [2]---->[3]----> None
+         prv    cur     nxt
+(cur.next = prv)
+None<----[1]<----[2]    [3]----> None
+(prev = cur; cur = nxt)
+None<----[1]<----[2]    [3]----> None
+                 prv    cur,nxt
+
+(third iteration, nxt = cur.next)
+None<----[1]<----[2]    [3]----> None
+                 prv    cur      nxt
+(cur.next = prv)
+None<----[1]<----[2]<----[3]     None
+                 prv     cur     nxt
+(prev = cur; cur = nxt)
+None<----[1]<----[2]<----[3](head)     None
+                         prv           cur, nxt ---> terminating condition                  
+"""
 
 def reverse(head):
     prevN = None
     currN = head
     nextN = None
-
     while(currN is not None):
         # Iterates till current node is last node
         nextN = currN.next  # saving next node
@@ -26,17 +54,12 @@ def reverse(head):
         # traversing previous and current pointers
         prevN = currN
         currN = nextN
-
     head = prevN
     return head
 
 """
 2. Detect loop in a linked list:
-
-
 """
 """
 3. Find Intersection point of two linked lists:
-
-
 """
