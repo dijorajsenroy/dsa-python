@@ -149,8 +149,7 @@ def deleteAtEndt(head, tail):
     if head is not None:
         # check if there is only one node
         if head is tail:
-            head = None
-            tail = None
+            del head, tail
         else:
             # delete tail using tail.prev
             before = tail.prev
@@ -172,19 +171,14 @@ to given.next so that given is bypassed and before is linked to the node after g
 def deleteGiven(head, given):
     if head is not None:
         if head is given:
-            if head.next is None:
-                head = None
-            else:
-                curr = head.next
-                curr.prev = None
-                head.next = None
-                head = curr
+            return deleteAtStart(head)
         else:
             # before is the node before given
             before = given.prev
             # after is the node after given (can be null)
             after = given.next
             given.prev = None
+            given.next = None
             # before is linked to null if given was last node
             before.next = after
             # if after exists, it should be linked to before
@@ -200,9 +194,9 @@ Implement and Test the functions:
 head = Node(1)
 head = insertAtStart(head, 0)
 head = insertAtEnd(head, 2)
-display(head)
+displayFromHead(head)
 given = head.next
 head = insertBefore(head, given, -1)
-display(head)
+displayFromHead(head)
 given = head.next
-display(deleteGiven(head, given))
+displayFromHead(deleteGiven(head, given))
