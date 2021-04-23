@@ -90,7 +90,39 @@ def loopFloydDetection(head):
             return True
     return False
 
-
+"""
+Removal of loops - This is based on Floyd's Cycle Finding Algorithm, which we use to determine the first
+meeting point of the two pointers. The algorithm states that the second meeting point of the pointers will
+be the first node of the cycle if the following steps are followed:
+(i) Use Floyd's Algo to find the first meeting point of the slow and fast pointers. 
+(ii) Set the slow pointer to the head node, and move them both at a pace of one node each till they coincide.
+(iii) The point at the two pointers collide is the first node of the cycle, if we maintain a prev pointer to 
+the fast pointer or compare the next of the two pointers till collision, we see that the fast pointer is the
+last node of the linked list and points to the first node of the cycle. Thus we need to de-link the past pointer.
+"""
+def detectAndRemove(head):
+    fast = head; slow = head
+    found = False # flag variable for detection of loop
+    # Use Floyd's to find the first meeting point.
+    while slow and fast and fast.next:
+        slow = slow.next # move one pace
+        fast = fast.next.next # move two paces
+        if fast is slow:
+            found = True
+            break
+    # loop detected
+    if found:
+        slow = head # reset slow pointer to head
+        # terminate loop when slow.next and fast.next meet at start of cycle
+        while slow.next is not fast.next:
+            # traverse till they meet 
+            slow = slow.next
+            fast = fast.next
+        # fast is the tail, de-link it from the cycle's starting node
+        fast.next = None
+    else:
+        print("No Cycle Detected")
+        
 """
 4. Find Intersection point of two Linked Lists:
 """
