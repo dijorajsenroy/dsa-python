@@ -12,35 +12,7 @@ set up the prev node in a way that its reference is now the curr node, and curr 
 this is repeated till prev becomes the last node.
 (v) When prev is the last node set it as the new head of the list. 
 
-For Example:
-
-(initially, nxt = cur.next)
-None     [1]---->[2]---->[3]----> None
-prv      cur     nxt
-(cur.next = prv)
-None<----[1]    [2]---->[3]----> None
-(prev = cur; cur = nxt)
-None<----[1]    [2]---->[3]----> None
-         prv    cur,nxt
-
-(second iteration, nxt = cur.next)
-None<----[1]    [2]---->[3]----> None
-         prv    cur     nxt
-(cur.next = prv)
-None<----[1]<----[2]    [3]----> None
-(prev = cur; cur = nxt)
-None<----[1]<----[2]    [3]----> None
-                 prv    cur,nxt
-
-(third iteration, nxt = cur.next)
-None<----[1]<----[2]    [3]----> None
-                 prv    cur      nxt
-(cur.next = prv)
-None<----[1]<----[2]<----[3]     None
-                 prv     cur     nxt
-(prev = cur; cur = nxt)
-None<----[1]<----[2]<----[3](head)     None
-                         prv           cur, nxt ---> terminating condition                  
+Refer to the animation given in the folder. Rev_LL.gif
 """
 
 def reverse(head):
@@ -58,8 +30,79 @@ def reverse(head):
     return head
 
 """
-2. Detect loop in a linked list:
+2. Traverse and Search in linked lists (recursively):
+"""
+def searchList(current, key):
+    # base case, current reaches null if value not found
+    if current.data == key:
+        return 1
+    elif current is None:
+        return -1
+    else:
+        return searchList(current.next, key)
+
+def reverseTraversal(last):
+    # last should refer to tail node
+    if last is None:
+        return 
+    print(last.data)
+    return reverseTraversal(last.prev)
+
+"""
+3. Detect and remove loops in a Linked List:
+
+This problem is going to be solved using Floyd's Cycle Detection Algorithm. We can also use a hash set to keep
+track of seen datapoints and return True, when a loop is found (element is seen twice) else it is added to set.
+In Floyd's cycle detection - we traverse a linked list using two pointers. We move one pointer one step, the
+other by two steps. If these pointers meet at the same node then there is a loop. If pointers do not meet 
+then linked list doesn’t have a loop. Floyd's Algorithm is also known as Tortoise and Hare algorithm. Refer to
+the Floyds_Cycle.gif file in the folder for the animation. 
+
+The steps in Floyd's Cycle Finding Algorithm:
+t - tortoise (slow moving), h - hare (fast moving)
+(i) Run a loop and check whether t, h or h.next is null. If it is null then there is no loop, as a linked list
+with a loop will never point to null, it always points to one of its nodes. 
+(ii) When there is no cycle, h is the first one to reach null as it moves two steps. However when there is a cycle
+there is a point where t and h meet at the same node, when that happens we know a cycle exists and return True.
+"""
+def loopDetectionHashing(head):
+    # linear time, linear space
+    seen = set()
+    curr = head
+    while curr is not None:
+        if curr.data in seen:
+            return True
+        else:
+            seen.add(curr.data)
+            curr = curr.next
+    return False
+
+def loopFloydDetection(head):
+    # linear time, constant space
+    t = head # tortoise
+    h = head # hare 
+    # checking if they are null every iteration
+    while t and h and h.next:
+        t = t.next  # tortoise moves one step
+        h = h.next.next  # hare moves two steps
+        if t is h:
+            # meeting point - cycle found
+            return True
+    return False
+
+
+"""
+4. Find Intersection point of two Linked Lists:
 """
 """
-3. Find Intersection point of two linked lists:
+5. Removes Duplicates from a sorted Linked List:
+"""
+"""
+6. Merge Sort for Linked Lists:
+"""
+"""
+7. Palindrome Linked Lists:
+"""
+"""
+8. LRU Cache Design Problem:
 """
