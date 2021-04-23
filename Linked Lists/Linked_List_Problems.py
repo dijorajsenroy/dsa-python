@@ -211,10 +211,51 @@ def mergeSort(head):
         return mergeSortedHalves(left, right)
 
 """
-5. LRU Cache Design Problem:
+5. Find Intersection point of two Linked Lists: We have two conjoined lists and we need to find the point at 
+which they intersect and form a Y shape list. The algorithm is a simple O(m + n) time complexity solution:
+(i) Count the lengths of the two lists and obtain the (d)difference. The difference signifies the number of 
+nodes that the larger list exceeds from the smaller list. 
+(ii) Traverse the larger list by d nodes. This equalises the difference between the two nodes.
+(iii) Traverse both the lists till a common node is reached. This is the intersection point. 
 """
+def countNodes(head):
+    curr = head
+    count = 0
+    while curr is not None:
+        count += 1
+        curr = curr.next
+    return count
+
+def listIntersection(head1, head2):
+    # compute difference in lengths
+    c1 = countNodes(head1)
+    c2 = countNodes(head2)
+    d = abs(c2 - c1)
+    # pointers to traverse nodes
+    curr1 = head1
+    curr2 = head2
+    if c2 > c1:
+        # traverse list 2 by d nodes
+        for _ in range(d):
+            curr2 = curr2.next
+    else:
+        # traverse list 1 by d nodes
+        for _ in range(d):
+            curr1 = curr1.next
+    # now that the difference is removed - traverse both
+    while curr1 is not None and curr2 is not None:
+        if curr1 is curr2:
+            # pointers meet at intersection point
+            print("Intersection at {0}".format(curr1.data))
+            break
+        else:
+            curr1 = curr1.next
+            curr2 = curr2.next
+    # intersection not found
+    return -1
+
 """
-6. Find Intersection point of two Linked Lists:
+6. LRU Cache Design Problem:
 """
 """
 7. Removes Duplicates from a sorted Linked List:
