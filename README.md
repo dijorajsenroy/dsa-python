@@ -48,11 +48,9 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - Linked_Lists_Types.py contains the implementation of Circular and XOR Linked List.
   
 - Stacks and Queues
-  - Stack.py and Queue.py Contain the Stack and Queue Implementations
-  - DeQeue.py and CQueue.py Contain Double ended Queue and Circular Queue
+  - Stacks.py and Queues.py Contain the Stack and Queue Implementations and Types
   - Stack_Problems.py and Queue_Problems.py contain the respective problems
-  - Stack_Linked_List.py contains the implementation of stack using linked list
-  - Queue_Linked_List.py contains the implementation of queue using linked list
+  - Linked_List_Imp.py contains the implementation of Stack and Queue using Linked List
 
 - Hashing and Heaps (To be updated)
   - Problems are contained in Hashing_Problems.py
