@@ -1,4 +1,4 @@
-# Implementation of Stack using Lists
+# Implementation of Stack using Array Module
 
 class Stack:
 
@@ -30,8 +30,7 @@ class Stack:
     def size(self):
         return len(self.stack)
 
-# Queue using Lists Implementation
-
+# Implementaton of Queue using Array module 
 
 class Queue:
 
@@ -63,6 +62,5 @@ class Queue:
     def sizeQueue(self):
         return len(self.queue)
 
-# Circular Queue
-
-# Double Ended Queue
+# Implementation of Circular Queue using Array Module
+# Implementation of Double Ended Queue using Array Module
