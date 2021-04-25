@@ -51,9 +51,11 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - Circular_Linked_List.py contains the implementation of Circular Linked List.
   
 - Stacks and Queues
-  - Python_Implementation.py Contain the Stack and Queue Implementations and Types
+  - Array_Implementation.py Contain the Stack and Queue Implementations and Types
   - Stack_Problems.py and Queue_Problems.py contain the respective problems
-  - Linked_List_Imp.py contains the implementation of Stack and Queue using Linked List
+  - LL_Implementation.py contains the implementation of Stack and Queue using Linked List
+
+- Trees
 
 - Hashing and Heaps (To be updated)
   - Problems are contained in Hashing_Problems.py
