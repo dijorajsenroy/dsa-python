@@ -16,6 +16,9 @@ My codes, and materials for Data Structures and Algorithms, and important interv
 The files are all in .py files, all codes are python implementations in form of functions. To describe what the function does please add a docstring above it,
 briefly describing the implementation of the algorithm. If the algorithm is taken from a particular source, like Hackerrank or Leetcode, mention that as well.
 
+- Cpp
+  - Contains different data structures and algorithms implemented in C++. Contents are as per the name of the file. 
+ 
 - Math and Bits
   - For popular named algorithms add the code in Useful_Named_Algorithms.py.
   - For Bit Maniplation problems add the code in Bit_Manipulation.py.
@@ -45,10 +48,10 @@ briefly describing the implementation of the algorithm. If the algorithm is take
   - Single_Linked_List.py contains the implementation and operations on Single Linked List.
   - Double_Linked_List.py contains the implementation and operations on Double Linked List.
   - Linked_List_Problems.py contain important problems on both Linked Lists.
-  - Linked_Lists_Types.py contains the implementation of Circular and XOR Linked List.
+  - Circular_Linked_List.py contains the implementation of Circular Linked List.
   
 - Stacks and Queues
-  - Stacks.py and Queues.py Contain the Stack and Queue Implementations and Types
+  - Python_Implementation.py Contain the Stack and Queue Implementations and Types
   - Stack_Problems.py and Queue_Problems.py contain the respective problems
   - Linked_List_Imp.py contains the implementation of Stack and Queue using Linked List
 
